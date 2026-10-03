@@ -1,26 +1,18 @@
-/* =========================================
+/* =========================================================
    ENGINEERING FORMULA HUB
-   script.js
-   Created by Rihan
-========================================= */
+   Main JavaScript
+   ========================================================= */
 
+document.addEventListener("DOMContentLoaded", function () {
 
-/* =========================================
-   PAGE LOADING
-========================================= */
-
-window.addEventListener("load", function () {
+    /* -----------------------------------------------------
+       1. SPLASH SCREEN
+       ----------------------------------------------------- */
 
     const splashScreen = document.getElementById("splash-screen");
     const mainContent = document.getElementById("main-content");
 
-    /*
-        Splash screen stays for 6 seconds.
-        After that, main website appears.
-    */
-
     setTimeout(function () {
-
         if (splashScreen) {
             splashScreen.classList.add("hide");
         }
@@ -28,15 +20,203 @@ window.addEventListener("load", function () {
         if (mainContent) {
             mainContent.classList.add("show");
         }
-
     }, 6000);
 
+
+    /* -----------------------------------------------------
+       2. FORMULA DATABASE CHECK
+       ----------------------------------------------------- */
+
+    if (typeof formulaDatabase !== "undefined") {
+        console.log("Formula database connected successfully.");
+        console.log(
+            "Total formulas:",
+            typeof getTotalFormulaCount === "function"
+                ? getTotalFormulaCount()
+                : "Unknown"
+        );
+    } else {
+        console.error("Formula database not found!");
+    }
+
+
+    /* -----------------------------------------------------
+       3. BASIC MATHEMATICS CARD
+       ----------------------------------------------------- */
+
+    const mathsHub = document.getElementById("maths-hub");
+
+    if (mathsHub) {
+
+        const categoryCards = mathsHub.querySelectorAll(".formula-category");
+
+        categoryCards.forEach(function (card) {
+
+            const heading = card.querySelector("h3");
+
+            if (!heading) return;
+
+            const headingText = heading.textContent.trim().toLowerCase();
+
+            /*
+             * Find Basic Mathematics category
+             */
+            if (headingText.includes("basic mathematics")) {
+
+                card.style.cursor = "pointer";
+
+                card.addEventListener("click", function () {
+                    openBasicMathematics();
+                });
+
+            }
+
+        });
+
+    }
+
+
+    /* -----------------------------------------------------
+       4. SEARCH SYSTEM
+       ----------------------------------------------------- */
+
+    const searchInput = document.getElementById("formula-search");
+    const searchButton = document.getElementById("search-btn");
+
+    function performSearch() {
+
+        if (!searchInput) return;
+
+        const query = searchInput.value.trim();
+
+        if (!query) {
+            clearSearch();
+            return;
+        }
+
+        /*
+         * Search formula database
+         */
+        if (typeof searchFormulaDatabase === "function") {
+
+            const results = searchFormulaDatabase(query);
+
+            console.log("Search results:", results);
+
+            if (results.length > 0) {
+
+                /*
+                 * If a result belongs to Basic Mathematics,
+                 * open the Basic Mathematics section.
+                 */
+                const basicResult = results.find(function (formula) {
+                    return formulaDatabase.basicMathematics &&
+                           formulaDatabase.basicMathematics.some(function (item) {
+                               return item.id === formula.id;
+                           });
+                });
+
+                if (basicResult) {
+                    openBasicMathematics();
+                }
+
+            } else {
+
+                alert("No formula found for: " + query);
+
+            }
+
+        }
+
+    }
+
+    if (searchButton) {
+        searchButton.addEventListener("click", performSearch);
+    }
+
+    if (searchInput) {
+
+        searchInput.addEventListener("keydown", function (event) {
+
+            if (event.key === "Enter") {
+                performSearch();
+            }
+
+        });
+
+    }
+
+
+    /* -----------------------------------------------------
+       5. HUB CARD NAVIGATION
+       ----------------------------------------------------- */
+
+    const hubCards = document.querySelectorAll(".hub-card");
+
+    hubCards.forEach(function (card) {
+
+        card.addEventListener("click", function () {
+
+            const target = card.getAttribute("data-target");
+
+            if (target) {
+                showSection(target);
+            }
+
+        });
+
+    });
+
+
+    /* -----------------------------------------------------
+       6. BACK TO TOP
+       ----------------------------------------------------- */
+
+    const backToTop = document.getElementById("back-to-top");
+
+    if (backToTop) {
+
+        backToTop.addEventListener("click", function () {
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        });
+
+    }
+
+
+    /* -----------------------------------------------------
+       7. "/" SHORTCUT FOR SEARCH
+       ----------------------------------------------------- */
+
+    document.addEventListener("keydown", function (event) {
+
+        if (
+            event.key === "/" &&
+            document.activeElement !== searchInput
+        ) {
+
+            event.preventDefault();
+
+            if (searchInput) {
+                searchInput.focus();
+            }
+
+        }
+
+    });
+
+
+    console.log("Engineering Formula Hub JavaScript loaded.");
 });
 
 
-/* =========================================
-   SECTION NAVIGATION
-========================================= */
+/* =========================================================
+   SHOW SECTION
+   ========================================================= */
 
 function showSection(sectionId) {
 
@@ -51,404 +231,297 @@ function showSection(sectionId) {
         behavior: "smooth",
         block: "start"
     });
+
 }
 
 
-/* =========================================
-   SEARCH SYSTEM
-========================================= */
+/* =========================================================
+   BASIC MATHEMATICS VIEW
+   ========================================================= */
 
-document.addEventListener("DOMContentLoaded", function () {
+function openBasicMathematics() {
 
-    const searchInput = document.getElementById("formula-search");
-    const searchButton = document.getElementById("search-btn");
-
-    if (!searchInput || !searchButton) {
+    if (
+        typeof formulaDatabase === "undefined" ||
+        !formulaDatabase.basicMathematics
+    ) {
+        alert("Basic Mathematics formulas could not be loaded.");
         return;
     }
 
 
-    function performSearch() {
-
-        const searchText = searchInput.value
-            .trim()
-            .toLowerCase();
-
-        /*
-            If search box is empty,
-            return everything to normal.
-        */
-
-        if (searchText === "") {
-
-            clearSearch();
-
-            return;
-        }
+    const formulas = formulaDatabase.basicMathematics;
 
 
-        /*
-            Search through formula categories
-            and individual sub-items.
-        */
-
-        const categories =
-            document.querySelectorAll(".formula-category");
-
-        let foundSomething = false;
+    /*
+     * Check whether the formula page already exists.
+     */
+    let formulaPage = document.getElementById(
+        "basic-mathematics-page"
+    );
 
 
-        categories.forEach(function (category) {
+    /*
+     * Create the page for the first time.
+     */
+    if (!formulaPage) {
 
-            const categoryText =
-                category.innerText.toLowerCase();
+        formulaPage = document.createElement("section");
 
-            const matches =
-                categoryText.includes(searchText);
+        formulaPage.id = "basic-mathematics-page";
 
-
-            if (matches) {
-
-                category.style.display = "";
-
-                foundSomething = true;
-
-            } else {
-
-                category.style.display = "none";
-
-            }
-
-        });
+        formulaPage.style.minHeight = "100vh";
+        formulaPage.style.padding = "40px 20px";
+        formulaPage.style.background = "#0b0b0b";
+        formulaPage.style.color = "#ffffff";
 
 
-        /*
-            Search hub cards as well.
-        */
+        /* -------------------------------------------------
+           Header
+           ------------------------------------------------- */
 
-        const hubCards =
-            document.querySelectorAll(".hub-card");
+        const header = document.createElement("div");
 
-        hubCards.forEach(function (card) {
-
-            const cardText =
-                card.innerText.toLowerCase();
-
-            if (cardText.includes(searchText)) {
-
-                card.style.display = "";
-
-                foundSomething = true;
-
-            } else {
-
-                card.style.display = "none";
-
-            }
-
-        });
+        header.style.maxWidth = "1100px";
+        header.style.margin = "0 auto 35px";
 
 
-        /*
-            Scroll to first result.
-        */
+        const backButton = document.createElement("button");
 
-        if (foundSomething) {
+        backButton.textContent = "← Back to Maths Hub";
 
-            const firstResult =
-                document.querySelector(
-                    ".formula-category[style='display: block'], .formula-category:not([style*='display: none'])"
-                );
+        backButton.style.padding = "12px 20px";
+        backButton.style.border = "1px solid #ff8a00";
+        backButton.style.background = "transparent";
+        backButton.style.color = "#ff8a00";
+        backButton.style.borderRadius = "8px";
+        backButton.style.cursor = "pointer";
+        backButton.style.fontSize = "15px";
 
-            if (firstResult) {
 
-                firstResult.scrollIntoView({
+        backButton.addEventListener("click", function () {
+
+            const mathsHub = document.getElementById("maths-hub");
+
+            if (mathsHub) {
+
+                mathsHub.scrollIntoView({
                     behavior: "smooth",
-                    block: "center"
+                    block: "start"
                 });
 
             }
 
-        } else {
+        });
 
-            showNoResults();
 
-        }
+        const title = document.createElement("h1");
 
-    }
+        title.textContent = "Basic Mathematics";
 
+        title.style.fontSize = "clamp(32px, 6vw, 58px)";
+        title.style.margin = "25px 0 10px";
+        title.style.color = "#ff8a00";
 
-    /* -----------------------------------------
-       SEARCH BUTTON
-    ----------------------------------------- */
 
-    searchButton.addEventListener(
-        "click",
-        performSearch
-    );
+        const subtitle = document.createElement("p");
 
+        subtitle.textContent =
+            "Fundamental mathematical formulas for engineering.";
 
-    /* -----------------------------------------
-       ENTER KEY SEARCH
-    ----------------------------------------- */
+        subtitle.style.fontSize = "18px";
+        subtitle.style.color = "#bdbdbd";
 
-    searchInput.addEventListener(
-        "keydown",
-        function (event) {
 
-            if (event.key === "Enter") {
+        header.appendChild(backButton);
+        header.appendChild(title);
+        header.appendChild(subtitle);
 
-                event.preventDefault();
 
-                performSearch();
+        /* -------------------------------------------------
+           Formula count
+           ------------------------------------------------- */
 
-            }
+        const count = document.createElement("div");
 
-        }
-    );
+        count.textContent =
+            formulas.length + " formulas available";
 
+        count.style.display = "inline-block";
+        count.style.marginTop = "15px";
+        count.style.padding = "8px 14px";
+        count.style.borderRadius = "20px";
+        count.style.background = "#171717";
+        count.style.border = "1px solid #333";
+        count.style.color = "#ff8a00";
 
-    /* -----------------------------------------
-       LIVE SEARCH
-    ----------------------------------------- */
 
-    searchInput.addEventListener(
-        "input",
-        function () {
+        header.appendChild(count);
 
-            if (searchInput.value.trim() === "") {
 
-                clearSearch();
+        /* -------------------------------------------------
+           Formula Grid
+           ------------------------------------------------- */
 
-            }
+        const grid = document.createElement("div");
 
-        }
-    );
+        grid.id = "basic-mathematics-grid";
 
-});
+        grid.style.maxWidth = "1100px";
+        grid.style.margin = "0 auto";
+        grid.style.display = "grid";
+        grid.style.gridTemplateColumns =
+            "repeat(auto-fit, minmax(260px, 1fr))";
+        grid.style.gap = "18px";
 
 
-/* =========================================
-   CLEAR SEARCH
-========================================= */
+        formulas.forEach(function (formula, index) {
 
-function clearSearch() {
+            const card = document.createElement("div");
 
-    const categories =
-        document.querySelectorAll(".formula-category");
+            card.style.background = "#151515";
+            card.style.border = "1px solid #2d2d2d";
+            card.style.borderRadius = "14px";
+            card.style.padding = "22px";
+            card.style.cursor = "pointer";
+            card.style.transition = "0.25s";
 
-    categories.forEach(function (category) {
 
-        category.style.display = "";
+            card.addEventListener("mouseenter", function () {
 
-    });
+                card.style.borderColor = "#ff8a00";
+                card.style.transform = "translateY(-3px)";
 
+            });
 
-    const hubCards =
-        document.querySelectorAll(".hub-card");
 
-    hubCards.forEach(function (card) {
+            card.addEventListener("mouseleave", function () {
 
-        card.style.display = "";
+                card.style.borderColor = "#2d2d2d";
+                card.style.transform = "translateY(0)";
 
-    });
+            });
 
 
-    removeNoResultsMessage();
-}
+            const number = document.createElement("div");
 
+            number.textContent =
+                String(index + 1).padStart(2, "0");
 
-/* =========================================
-   NO RESULTS MESSAGE
-========================================= */
+            number.style.color = "#777";
+            number.style.fontSize = "13px";
+            number.style.marginBottom = "10px";
 
-function showNoResults() {
 
-    removeNoResultsMessage();
+            const name = document.createElement("h3");
 
+            name.textContent = formula.name;
 
-    const message =
-        document.createElement("div");
+            name.style.fontSize = "22px";
+            name.style.margin = "0 0 14px";
+            name.style.color = "#ffffff";
 
-    message.id = "no-results-message";
 
-    message.style.textAlign = "center";
-    message.style.padding = "30px";
-    message.style.margin = "20px auto";
-    message.style.maxWidth = "600px";
+            const formulaText = document.createElement("div");
 
-    message.innerHTML = `
-        <h3 style="color:#ff9800;">
-            No formula found
-        </h3>
+            formulaText.textContent = formula.formula;
 
-        <p style="color:#858d96;">
-            Try searching with another formula name,
-            topic or keyword.
-        </p>
-    `;
+            formulaText.style.fontSize = "21px";
+            formulaText.style.fontWeight = "600";
+            formulaText.style.color = "#ff8a00";
+            formulaText.style.padding = "14px";
+            formulaText.style.background = "#0d0d0d";
+            formulaText.style.borderRadius = "8px";
+            formulaText.style.overflowX = "auto";
 
 
-    const mathsHub =
-        document.getElementById("maths-hub");
+            card.appendChild(number);
+            card.appendChild(name);
+            card.appendChild(formulaText);
 
-    if (mathsHub) {
 
-        mathsHub.appendChild(message);
-
-    }
-
-}
-
-
-/* =========================================
-   REMOVE NO RESULTS MESSAGE
-========================================= */
-
-function removeNoResultsMessage() {
-
-    const message =
-        document.getElementById(
-            "no-results-message"
-        );
-
-    if (message) {
-
-        message.remove();
-
-    }
-
-}
-
-
-/* =========================================
-   HUB CARD CLICK SUPPORT
-========================================= */
-
-document.addEventListener("DOMContentLoaded", function () {
-
-    const hubCards =
-        document.querySelectorAll(".hub-card");
-
-
-    hubCards.forEach(function (card) {
-
-        card.addEventListener(
-            "click",
-            function () {
-
-                const target =
-                    card.getAttribute("data-target");
-
-                if (target) {
-
-                    showSection(target);
-
-                }
-
-            }
-        );
-
-    });
-
-});
-
-
-/* =========================================
-   FORMULA ITEM CLICK SUPPORT
-========================================= */
-
-document.addEventListener("DOMContentLoaded", function () {
-
-    const subItems =
-        document.querySelectorAll(".sub-item");
-
-
-    subItems.forEach(function (item) {
-
-        item.addEventListener(
-            "click",
-            function () {
-
-                /*
-                    Formula-detail system will be
-                    connected later through formulas.js.
-                */
-
-                const formulaName =
-                    item.innerText.trim();
+            /*
+             * Formula detail will be connected in next step.
+             */
+            card.addEventListener("click", function () {
 
                 console.log(
                     "Formula selected:",
-                    formulaName
+                    formula.name,
+                    formula.id
                 );
 
-            }
-        );
-
-    });
-
-});
+            });
 
 
-/* =========================================
-   BACK TO TOP
-========================================= */
+            grid.appendChild(card);
 
-function scrollToTop() {
+        });
 
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
+
+        formulaPage.appendChild(header);
+        formulaPage.appendChild(grid);
+
+
+        /*
+         * Add page after Maths Hub.
+         */
+        const mathsHubSection = document.getElementById("maths-hub");
+
+        if (mathsHubSection) {
+            mathsHubSection.parentNode.insertBefore(
+                formulaPage,
+                mathsHubSection.nextSibling
+            );
+        }
+
+    }
+
+
+    /*
+     * Show the formula page.
+     */
+
+    formulaPage.style.display = "block";
+
+
+    setTimeout(function () {
+
+        formulaPage.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+    }, 100);
 
 }
 
 
-/* =========================================
-   KEYBOARD SHORTCUT
-========================================= */
+/* =========================================================
+   CLEAR SEARCH
+   ========================================================= */
 
-document.addEventListener(
-    "keydown",
-    function (event) {
+function clearSearch() {
 
-        /*
-            "/" focuses the search box.
-        */
+    const searchInput =
+        document.getElementById("formula-search");
 
-        if (
-            event.key === "/" &&
-            document.activeElement.tagName !== "INPUT"
-        ) {
-
-            event.preventDefault();
-
-            const searchInput =
-                document.getElementById(
-                    "formula-search"
-                );
-
-            if (searchInput) {
-
-                searchInput.focus();
-
-            }
-
-        }
-
+    if (searchInput) {
+        searchInput.value = "";
     }
-);
+
+}
 
 
-/* =========================================
-   CONSOLE MESSAGE
-========================================= */
-
-console.log(
-    "Engineering Formula Hub loaded successfully."
-);
+/* =========================================================
+   CONSOLE INFO
+   ========================================================= */
 
 console.log(
-    "Created by Rihan"
+    "%cEngineering Formula Hub",
+    "font-size:18px;font-weight:bold;"
+);
+
+console.log(
+    "Ready for formula database integration."
 );
