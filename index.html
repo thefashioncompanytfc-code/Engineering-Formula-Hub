@@ -1,815 +1,679 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
+<!DOCTYPE html><html lang="en"><head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Engineering Formula Hub</title>
 
-    <title>Engineering Formula Hub</title>
+<meta name="description"
+    content="Engineering Formula Hub — Mathematics, Physics, Laws, Chemistry and Engineering formulas for future engineers.">
 
-    <meta name="description"
-        content="Engineering Formula Hub — Mathematics, Physics, Laws, Formulae and Chemistry Basics for future engineers.">
+<link rel="stylesheet" href="style.css">
 
-    <link rel="stylesheet" href="style.css">
-</head>
+</head><body><!-- =====================================================
+     SPLASH SCREEN
+====================================================== -->
 
-<body>
+<section id="splash-screen" class="splash-screen">
 
-    <!-- =====================================================
-         OPENING SPLASH SCREEN
-    ====================================================== -->
+    <div class="splash-content">
 
-    <section id="splash-screen" class="splash-screen">
+        <div class="gear">⚙</div>
 
-        <div class="splash-content">
+        <h1>Formula Hub for All Future Er's</h1>
 
-            <div class="gear">⚙</div>
+        <p>Created by Rihan</p>
 
-            <h1>Formula Hub for All Future Er's</h1>
+        <div class="loading-line">
+            <span></span>
+        </div>
 
-            <p>Created by Rihan</p>
+        <small>Loading Engineering Formula Hub...</small>
 
-            <div class="loading-line">
-                <span></span>
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     MAIN WEBSITE
+====================================================== -->
+
+<main id="main-content" class="main-content">
+
+
+    <!-- =================================================
+         HEADER
+    ================================================== -->
+
+    <header class="header">
+
+        <div class="brand">
+
+            <span class="brand-icon">⚙️</span>
+
+            <div>
+
+                <h1>Engineering Formula Hub</h1>
+
+                <p>Your Formula Reference for Engineering</p>
+
             </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =================================================
+         HERO
+    ================================================== -->
+
+    <section class="hero">
+
+        <p class="hero-small">
+            WELCOME, FUTURE ENGINEER
+        </p>
+
+        <h2>
+            Engineering formulas.<br>
+            All in one place.
+        </h2>
+
+        <p class="hero-text">
+            Mathematics, Physics, Laws, Chemistry and
+            engineering formulas — organized for quick learning.
+        </p>
+
+
+        <!-- SEARCH -->
+
+        <div class="search-box">
+
+            <input
+                type="search"
+                id="formula-search"
+                placeholder="Search a formula, topic or concept..."
+                autocomplete="off"
+            >
+
+            <button
+                type="button"
+                id="search-btn"
+            >
+                Search
+            </button>
 
         </div>
 
     </section>
 
 
-    <!-- =====================================================
-         MAIN WEBSITE
-    ====================================================== -->
+    <!-- =================================================
+         ENGINEERING HUBS
+    ================================================== -->
 
-    <main id="main-content" class="main-content">
+    <section class="hub-section">
 
+        <div class="section-heading">
 
-        <!-- =================================================
-             HEADER
-        ================================================== -->
+            <p>EXPLORE</p>
 
-        <header class="header">
+            <h2>Engineering Hubs</h2>
 
-            <div class="brand">
+        </div>
 
-                <span class="brand-icon">⚙️</span>
 
-                <div>
+        <div class="hub-grid">
 
-                    <h1>Engineering Formula Hub</h1>
 
-                    <p>Your Formula Reference for Engineering</p>
+            <!-- MATHS -->
 
-                </div>
+            <button
+                class="hub-card"
+                type="button"
+                onclick="showSection('maths-hub')"
+            >
 
-            </div>
+                <span class="card-icon">📐</span>
 
-        </header>
+                <h3>Maths Hub</h3>
 
+                <p>
+                    Mathematics formulas from basics
+                    to engineering mathematics.
+                </p>
 
-        <!-- =================================================
-             HERO SECTION
-        ================================================== -->
+                <span class="card-arrow">→</span>
 
-        <section class="hero">
+            </button>
 
-            <p class="hero-small">
-                WELCOME, FUTURE ENGINEER
-            </p>
 
-            <h2>
-                Engineering formulas.<br>
-                All in one place.
-            </h2>
+            <!-- PHYSICS -->
 
-            <p class="hero-text">
+            <button
+                class="hub-card"
+                type="button"
+                onclick="showSection('physics-hub')"
+            >
 
-                Mathematics, Physics, Laws, Chemistry basics and
-                engineering formulas — organized for quick learning.
+                <span class="card-icon">⚡</span>
 
-            </p>
+                <h3>Physics</h3>
 
+                <p>
+                    Important physics laws, equations
+                    and engineering formulas.
+                </p>
 
-            <!-- SEARCH -->
+                <span class="card-arrow">→</span>
 
-            <div class="search-box">
+            </button>
 
-                <input
-                    type="search"
-                    id="formula-search"
-                    placeholder="Search a formula, topic or concept..."
-                    autocomplete="off"
-                >
 
-                <button
-                    type="button"
-                    id="search-btn"
-                >
-                    Search
-                </button>
+            <!-- LAWS -->
 
-            </div>
+            <button
+                class="hub-card"
+                type="button"
+                onclick="showSection('laws-hub')"
+            >
 
-        </section>
+                <span class="card-icon">📜</span>
 
+                <h3>Laws &amp; Formulae</h3>
 
-        <!-- =================================================
-             MAIN ENGINEERING HUBS
-        ================================================== -->
+                <p>
+                    Important scientific laws and
+                    fundamental equations.
+                </p>
 
-        <section class="hub-section">
+                <span class="card-arrow">→</span>
 
-            <div class="section-heading">
+            </button>
 
-                <p>EXPLORE</p>
 
-                <h2>Engineering Hubs</h2>
+            <!-- CHEMISTRY -->
 
-            </div>
+            <button
+                class="hub-card"
+                type="button"
+                onclick="showSection('chemistry-hub')"
+            >
 
+                <span class="card-icon">🧪</span>
 
-            <div class="hub-grid">
+                <h3>Chemistry Basics</h3>
 
+                <p>
+                    Essential chemistry formulas,
+                    equations and concepts.
+                </p>
 
-                <!-- ===============================
-                     MATHS HUB
-                ================================ -->
+                <span class="card-arrow">→</span>
 
-                <button
-                    class="hub-card"
-                    onclick="showSection('maths-hub')"
-                >
+            </button>
 
-                    <span class="card-icon">📐</span>
+        </div>
 
-                    <h3>Maths Hub</h3>
+    </section>
 
-                    <p>
-                        Mathematics formulas from basics
-                        to engineering mathematics.
-                    </p>
 
-                    <span class="card-arrow">→</span>
+    <!-- =================================================
+         MATHS HUB
+    ================================================== -->
 
-                </button>
+    <section
+        id="maths-hub"
+        class="content-section"
+    >
 
+        <div class="section-heading">
 
-                <!-- ===============================
-                     PHYSICS HUB
-                ================================ -->
+            <p>MATHEMATICS</p>
 
-                <button
-                    class="hub-card"
-                    onclick="showSection('physics-hub')"
-                >
+            <h2>Maths Formula Hub</h2>
 
-                    <span class="card-icon">⚡</span>
+            <span>
+                Essential mathematics for every engineering branch.
+            </span>
 
-                    <h3>Physics</h3>
+        </div>
 
-                    <p>
-                        Important physics laws, equations
-                        and engineering formulas.
-                    </p>
 
-                    <span class="card-arrow">→</span>
+        <div class="maths-grid">
 
-                </button>
 
+            <!-- 01 -->
 
-                <!-- ===============================
-                     LAWS HUB
-                ================================ -->
+            <article class="formula-category">
 
-                <button
-                    class="hub-card"
-                    onclick="showSection('laws-hub')"
-                >
+                <div class="category-number">01</div>
 
-                    <span class="card-icon">📜</span>
+                <h3>Basic Mathematics</h3>
 
-                    <h3>Laws &amp; Formulae</h3>
+                <p class="category-description">
+                    Fundamental mathematical operations
+                    and concepts.
+                </p>
 
-                    <p>
-                        Important scientific laws and
-                        fundamental equations.
-                    </p>
+                <ul>
+                    <li>Addition</li>
+                    <li>Subtraction</li>
+                    <li>Multiplication</li>
+                    <li>Division</li>
+                    <li>Fractions</li>
+                    <li>Ratio &amp; proportion</li>
+                    <li>Percentage</li>
+                    <li>Powers &amp; roots</li>
+                    <li>Indices</li>
+                    <li>BODMAS</li>
+                    <li>Scientific notation</li>
+                    <li>Approximation</li>
+                    <li>Basic algebraic manipulation</li>
+                </ul>
 
-                    <span class="card-arrow">→</span>
+            </article>
 
-                </button>
 
+            <!-- 02 -->
 
-                <!-- ===============================
-                     CHEMISTRY HUB
-                ================================ -->
+            <article class="formula-category">
 
-                <button
-                    class="hub-card"
-                    onclick="showSection('chemistry-hub')"
-                >
+                <div class="category-number">02</div>
 
-                    <span class="card-icon">🧪</span>
+                <h3>Algebra</h3>
 
-                    <h3>Chemistry Basics</h3>
+                <p class="category-description">
+                    Algebraic identities, equations
+                    and functions.
+                </p>
 
-                    <p>
-                        Essential chemistry formulas,
-                        equations and concepts.
-                    </p>
+                <ul>
+                    <li>Algebraic identities</li>
+                    <li>Factorisation</li>
+                    <li>Linear equations</li>
+                    <li>Simultaneous equations</li>
+                    <li>Quadratic equations</li>
+                    <li>Roots &amp; discriminant</li>
+                    <li>Polynomials</li>
+                    <li>Partial fractions</li>
+                    <li>Progressions</li>
+                    <li class="sub-item">AP</li>
+                    <li class="sub-item">GP</li>
+                    <li class="sub-item">HP</li>
+                    <li>Binomial theorem</li>
+                    <li>Permutation &amp; combination</li>
+                    <li>Logarithms</li>
+                    <li>Exponential functions</li>
+                </ul>
 
-                    <span class="card-arrow">→</span>
+            </article>
 
-                </button>
 
-            </div>
+            <!-- 03 -->
 
-        </section>
+            <article class="formula-category">
 
+                <div class="category-number">03</div>
 
-        <!-- =================================================
-             MATHS HUB
-        ================================================== -->
+                <h3>Trigonometry</h3>
 
-        <section
-            id="maths-hub"
-            class="content-section"
-        >
+                <p class="category-description">
+                    Trigonometric identities, equations
+                    and functions.
+                </p>
 
-            <div class="section-heading">
+                <ul>
+                    <li>Basic ratios</li>
+                    <li>Reciprocal identities</li>
+                    <li>Pythagorean identities</li>
+                    <li>Allied angles</li>
+                    <li>Compound angles</li>
+                    <li>Multiple angles</li>
+                    <li>Half angles</li>
+                    <li>Product-to-sum</li>
+                    <li>Sum-to-product</li>
+                    <li>Inverse trigonometry</li>
+                    <li>General solutions</li>
+                    <li>Triangle formulas</li>
+                </ul>
 
-                <p>MATHEMATICS</p>
+            </article>
 
-                <h2>Maths Formula Hub</h2>
 
-                <span>
-                    Essential mathematics for every engineering branch.
-                </span>
+            <!-- 04 -->
 
-            </div>
+            <article class="formula-category">
 
+                <div class="category-number">04</div>
 
-            <div class="maths-grid">
+                <h3>Coordinate Geometry</h3>
 
+                <p class="category-description">
+                    Geometry formulas used in mathematics
+                    and engineering.
+                </p>
 
-                <!-- =================================================
-                     01 BASIC MATHEMATICS
-                ================================================== -->
+                <ul>
+                    <li>Distance</li>
+                    <li>Section</li>
+                    <li>Midpoint</li>
+                    <li>Slope</li>
+                    <li>Straight line</li>
+                    <li>Angle between lines</li>
+                    <li>Distance from point to line</li>
+                    <li>Circle</li>
+                    <li>Parabola</li>
+                    <li>Ellipse</li>
+                    <li>Hyperbola</li>
+                    <li>Polar coordinates</li>
+                </ul>
 
-                <article class="formula-category">
+            </article>
 
-                    <div class="category-number">
-                        01
-                    </div>
 
-                    <h3>
-                        Basic Mathematics
-                    </h3>
+            <!-- 05 -->
 
-                    <p class="category-description">
+            <article class="formula-category featured-category">
 
-                        Fundamental mathematical operations
-                        and concepts.
+                <div class="category-number">05</div>
 
-                    </p>
+                <h3>Differentiation</h3>
 
-                    <ul>
+                <p class="category-description">
+                    Detailed differentiation rules
+                    and applications.
+                </p>
 
-                        <li>Addition</li>
+                <ul>
+                    <li>Basic derivative rules</li>
+                    <li>Constant rule</li>
+                    <li>Power rule</li>
+                    <li>Sum/difference rule</li>
+                    <li>Product rule</li>
+                    <li>Quotient rule</li>
+                    <li>Chain rule</li>
+                    <li>Trigonometric derivatives</li>
+                    <li>Inverse-trig derivatives</li>
+                    <li>Exponential derivatives</li>
+                    <li>Logarithmic derivatives</li>
+                    <li>Implicit differentiation</li>
+                    <li>Parametric differentiation</li>
+                    <li>Higher-order derivatives</li>
+                    <li>Partial derivatives</li>
+                    <li>Total derivatives</li>
+                    <li>Maxima &amp; minima</li>
+                    <li>Tangent &amp; normal</li>
+                    <li>Rate of change</li>
+                </ul>
 
-                        <li>Subtraction</li>
+            </article>
 
-                        <li>Multiplication</li>
 
-                        <li>Division</li>
+            <!-- 06 -->
 
-                        <li>Fractions</li>
+            <article class="formula-category featured-category">
 
-                        <li>Ratio &amp; proportion</li>
+                <div class="category-number">06</div>
 
-                        <li>Percentage</li>
+                <h3>Integration</h3>
 
-                        <li>Powers &amp; roots</li>
+                <p class="category-description">
+                    Integration formulas, methods
+                    and applications.
+                </p>
 
-                        <li>Indices</li>
+                <ul>
+                    <li>Basic integration formulas</li>
+                    <li>Power rule</li>
+                    <li>Trigonometric integration</li>
+                    <li>Inverse-trig forms</li>
+                    <li>Exponential</li>
+                    <li>Logarithmic</li>
+                    <li>Substitution</li>
+                    <li>Integration by parts</li>
+                    <li>Partial fractions</li>
+                    <li>Definite integrals</li>
+                    <li>Properties of definite integrals</li>
+                    <li>Area under curve</li>
+                    <li>Area between curves</li>
+                    <li>Volume</li>
+                </ul>
 
-                        <li>BODMAS</li>
+            </article>
 
-                        <li>Scientific notation</li>
 
-                        <li>Approximation</li>
+            <!-- 07 -->
 
-                        <li>Basic algebraic manipulation</li>
+            <article class="formula-category">
 
-                    </ul>
+                <div class="category-number">07</div>
 
-                </article>
+                <h3>Differential Equations</h3>
 
+                <p class="category-description">
+                    Important differential equation
+                    methods for engineering.
+                </p>
 
-                <!-- =================================================
-                     02 ALGEBRA
-                ================================================== -->
+                <ul>
+                    <li>Order &amp; degree</li>
+                    <li>Variable separable</li>
+                    <li>Homogeneous</li>
+                    <li>Linear differential equations</li>
+                    <li>First-order equations</li>
+                    <li>Higher-order equations</li>
+                    <li>Complementary function</li>
+                    <li>Particular integral</li>
+                    <li>Basic engineering applications</li>
+                </ul>
 
-                <article class="formula-category">
+            </article>
 
-                    <div class="category-number">
-                        02
-                    </div>
 
-                    <h3>
-                        Algebra
-                    </h3>
+            <!-- 08 -->
 
-                    <p class="category-description">
+            <article class="formula-category">
 
-                        Algebraic identities, equations
-                        and functions.
+                <div class="category-number">08</div>
 
-                    </p>
+                <h3>Matrices &amp; Determinants</h3>
 
-                    <ul>
+                <p class="category-description">
+                    Matrix operations, determinants
+                    and linear algebra.
+                </p>
 
-                        <li>Algebraic identities</li>
+                <ul>
+                    <li>Matrix operations</li>
+                    <li>Types of matrices</li>
+                    <li>Transpose</li>
+                    <li>Determinant</li>
+                    <li>Minor/cofactor</li>
+                    <li>Adjoint</li>
+                    <li>Inverse</li>
+                    <li>Rank</li>
+                    <li>Eigenvalues</li>
+                    <li>Eigenvectors</li>
+                    <li>Cayley-Hamilton</li>
+                    <li>Simultaneous equations</li>
+                </ul>
 
-                        <li>Factorisation</li>
+            </article>
 
-                        <li>Linear equations</li>
 
-                        <li>Simultaneous equations</li>
+            <!-- 09 -->
 
-                        <li>Quadratic equations</li>
+            <article class="formula-category">
 
-                        <li>Roots &amp; discriminant</li>
+                <div class="category-number">09</div>
 
-                        <li>Polynomials</li>
+                <h3>Vector Algebra</h3>
 
-                        <li>Partial fractions</li>
+                <p class="category-description">
+                    Vectors and their applications
+                    in engineering mathematics.
+                </p>
 
-                        <li>Progressions</li>
+                <ul>
+                    <li>Vector magnitude</li>
+                    <li>Unit vector</li>
+                    <li>Addition/subtraction</li>
+                    <li>Dot product</li>
+                    <li>Cross product</li>
+                    <li>Projection</li>
+                    <li>Scalar triple product</li>
+                    <li>Vector triple product</li>
+                    <li>Direction cosines</li>
+                    <li>Lines and planes</li>
+                </ul>
 
-                        <li class="sub-item">AP</li>
+            </article>
 
-                        <li class="sub-item">GP</li>
 
-                        <li class="sub-item">HP</li>
+            <!-- 10 -->
 
-                        <li>Binomial theorem</li>
+            <article class="formula-category">
 
-                        <li>Permutation &amp; combination</li>
+                <div class="category-number">10</div>
 
-                        <li>Logarithms</li>
+                <h3>Complex Numbers</h3>
 
-                        <li>Exponential functions</li>
+                <p class="category-description">
+                    Essential complex-number formulas
+                    and representations.
+                </p>
 
-                    </ul>
+                <ul>
+                    <li>Basic form</li>
+                    <li>Conjugate</li>
+                    <li>Modulus</li>
+                    <li>Argument</li>
+                    <li>Polar form</li>
+                    <li>Euler form</li>
+                    <li>De Moivre's theorem</li>
+                    <li>Roots of complex numbers</li>
+                </ul>
 
-                </article>
+            </article>
 
 
-                <!-- =================================================
-                     03 TRIGONOMETRY
-                ================================================== -->
+        </div>
 
-                <article class="formula-category">
+    </section>
 
-                    <div class="category-number">
-                        03
-                    </div>
 
-                    <h3>
-                        Trigonometry
-                    </h3>
+    <!-- =================================================
+         PHYSICS HUB
+    ================================================== -->
 
-                    <p class="category-description">
+    <section
+        id="physics-hub"
+        class="content-section future-section"
+    >
 
-                        Trigonometric identities, equations
-                        and functions.
+        <div class="section-heading">
 
-                    </p>
+            <p>PHYSICS</p>
 
-                    <ul>
+            <h2>Physics Formula Hub</h2>
 
-                        <li>Basic ratios</li>
+            <span>
+                Physics laws and formulas will be added here.
+            </span>
 
-                        <li>Reciprocal identities</li>
+        </div>
 
-                        <li>Pythagorean identities</li>
+    </section>
 
-                        <li>Allied angles</li>
 
-                        <li>Compound angles</li>
+    <!-- =================================================
+         LAWS HUB
+    ================================================== -->
 
-                        <li>Multiple angles</li>
+    <section
+        id="laws-hub"
+        class="content-section future-section"
+    >
 
-                        <li>Half angles</li>
+        <div class="section-heading">
 
-                        <li>Product-to-sum</li>
+            <p>LAWS</p>
 
-                        <li>Sum-to-product</li>
+            <h2>Laws &amp; Formulae</h2>
 
-                        <li>Inverse trigonometry</li>
+            <span>
+                Important scientific laws and equations
+                will be added here.
+            </span>
 
-                        <li>General solutions</li>
+        </div>
 
-                        <li>Triangle formulas</li>
+    </section>
 
-                    </ul>
 
-                </article>
+    <!-- =================================================
+         CHEMISTRY HUB
+    ================================================== -->
 
+    <section
+        id="chemistry-hub"
+        class="content-section future-section"
+    >
 
-                <!-- =================================================
-                     04 COORDINATE GEOMETRY
-                ================================================== -->
+        <div class="section-heading">
 
-                <article class="formula-category">
+            <p>CHEMISTRY</p>
 
-                    <div class="category-number">
-                        04
-                    </div>
+            <h2>Chemistry Basics</h2>
 
-                    <h3>
-                        Coordinate Geometry
-                    </h3>
+            <span>
+                Essential chemistry formulas and equations
+                will be added here.
+            </span>
 
-                    <p class="category-description">
+        </div>
 
-                        Geometry formulas used in mathematics
-                        and engineering.
+    </section>
 
-                    </p>
 
-                    <ul>
+    <!-- =================================================
+         FOOTER
+    ================================================== -->
 
-                        <li>Distance</li>
+    <footer class="footer">
 
-                        <li>Section</li>
+        <p>
+            Engineering Formula Hub
+        </p>
 
-                        <li>Midpoint</li>
+        <span>
+            Created by Rihan • Built for future engineers
+        </span>
 
-                        <li>Slope</li>
+    </footer>
 
-                        <li>Straight line</li>
 
-                        <li>Angle between lines</li>
+    <!-- =================================================
+         BACK TO TOP
+    ================================================== -->
 
-                        <li>Distance from point to line</li>
+    <button
+        id="back-to-top"
+        class="back-to-top"
+        type="button"
+    >
+        ↑
+    </button>
 
-                        <li>Circle</li>
 
-                        <li>Parabola</li>
+</main>
 
-                        <li>Ellipse</li>
 
-                        <li>Hyperbola</li>
+<!-- =====================================================
+     JAVASCRIPT
+     IMPORTANT: DATABASE FIRST, MAIN SCRIPT SECOND
+====================================================== -->
 
-                        <li>Polar coordinates</li>
+<script src="formulas.js"></script>
+<script src="script.js"></script>
 
-                    </ul>
-
-                </article>
-
-
-                <!-- =================================================
-                     05 DIFFERENTIATION
-                ================================================== -->
-
-                <article class="formula-category featured-category">
-
-                    <div class="category-number">
-                        05
-                    </div>
-
-                    <h3>
-                        Differentiation
-                    </h3>
-
-                    <p class="category-description">
-
-                        Detailed differentiation rules
-                        and applications.
-
-                    </p>
-
-                    <ul>
-
-                        <li>Basic derivative rules</li>
-
-                        <li>Constant rule</li>
-
-                        <li>Power rule</li>
-
-                        <li>Sum/difference rule</li>
-
-                        <li>Product rule</li>
-
-                        <li>Quotient rule</li>
-
-                        <li>Chain rule</li>
-
-                        <li>Trigonometric derivatives</li>
-
-                        <li>Inverse-trig derivatives</li>
-
-                        <li>Exponential derivatives</li>
-
-                        <li>Logarithmic derivatives</li>
-
-                        <li>Implicit differentiation</li>
-
-                        <li>Parametric differentiation</li>
-
-                        <li>Higher-order derivatives</li>
-
-                        <li>Partial derivatives</li>
-
-                        <li>Total derivatives</li>
-
-                        <li>Maxima &amp; minima</li>
-
-                        <li>Tangent &amp; normal</li>
-
-                        <li>Rate of change</li>
-
-                    </ul>
-
-                </article>
-
-
-                <!-- =================================================
-                     06 INTEGRATION
-                ================================================== -->
-
-                <article class="formula-category featured-category">
-
-                    <div class="category-number">
-                        06
-                    </div>
-
-                    <h3>
-                        Integration
-                    </h3>
-
-                    <p class="category-description">
-
-                        Integration formulas, methods
-                        and applications.
-
-                    </p>
-
-                    <ul>
-
-                        <li>Basic integration formulas</li>
-
-                        <li>Power rule</li>
-
-                        <li>Trigonometric integration</li>
-
-                        <li>Inverse-trig forms</li>
-
-                        <li>Exponential</li>
-
-                        <li>Logarithmic</li>
-
-                        <li>Substitution</li>
-
-                        <li>Integration by parts</li>
-
-                        <li>Partial fractions</li>
-
-                        <li>Definite integrals</li>
-
-                        <li>Properties of definite integrals</li>
-
-                        <li>Area under curve</li>
-
-                        <li>Area between curves</li>
-
-                        <li>Volume</li>
-
-                    </ul>
-
-                </article>
-
-
-                <!-- =================================================
-                     07 DIFFERENTIAL EQUATIONS
-                ================================================== -->
-
-                <article class="formula-category">
-
-                    <div class="category-number">
-                        07
-                    </div>
-
-                    <h3>
-                        Differential Equations
-                    </h3>
-
-                    <p class="category-description">
-
-                        Important differential equation
-                        methods for engineering.
-
-                    </p>
-
-                    <ul>
-
-                        <li>Order &amp; degree</li>
-
-                        <li>Variable separable</li>
-
-                        <li>Homogeneous</li>
-
-                        <li>Linear differential equations</li>
-
-                        <li>First-order equations</li>
-
-                        <li>Higher-order equations</li>
-
-                        <li>Complementary function</li>
-
-                        <li>Particular integral</li>
-
-                        <li>Basic engineering applications</li>
-
-                    </ul>
-
-                </article>
-
-
-                <!-- =================================================
-                     08 MATRICES & DETERMINANTS
-                ================================================== -->
-
-                <article class="formula-category">
-
-                    <div class="category-number">
-                        08
-                    </div>
-
-                    <h3>
-                        Matrices &amp; Determinants
-                    </h3>
-
-                    <p class="category-description">
-
-                        Matrix operations, determinants
-                        and linear algebra.
-
-                    </p>
-
-                    <ul>
-
-                        <li>Matrix operations</li>
-
-                        <li>Types of matrices</li>
-
-                        <li>Transpose</li>
-
-                        <li>Determinant</li>
-
-                        <li>Minor/cofactor</li>
-
-                        <li>Adjoint</li>
-
-                        <li>Inverse</li>
-
-                        <li>Rank</li>
-
-                        <li>Eigenvalues</li>
-
-                        <li>Eigenvectors</li>
-
-                        <li>Cayley-Hamilton</li>
-
-                        <li>Simultaneous equations</li>
-
-                    </ul>
-
-                </article>
-
-
-                <!-- =================================================
-                     09 VECTOR ALGEBRA
-                ================================================== -->
-
-                <article class="formula-category">
-
-                    <div class="category-number">
-                        09
-                    </div>
-
-                    <h3>
-                        Vector Algebra
-                    </h3>
-
-                    <p class="category-description">
-
-                        Vectors and their applications
-                        in engineering mathematics.
-
-                    </p>
-
-                    <ul>
-
-                        <li>Vector magnitude</li>
-
-                        <li>Unit vector</li>
-
-                        <li>Addition/subtraction</li>
-
-                        <li>Dot product</li>
-
-                        <li>Cross product</li>
-
-                        <li>Projection</li>
-
-                        <li>Scalar triple product</li>
-
-                        <li>Vector triple product</li>
-
-                        <li>Direction cosines</li>
-
-                        <li>Lines and planes</li>
-
-                    </ul>
-
-                </article>
-
-
-                <!-- =================================================
-                     10 COMPLEX NUMBERS
-                ================================================== -->
-
-                <article class="formula-category">
-
-                    <div class="category-number">
-                        10
-                    </div>
-
-                    <h3>
-                        Complex Numbers
-                    </h3>
-
-                    <p class="category-description">
-
-                        Essential complex-number formulas
-                        and representations.
-
-                    </p>
-
-                    <ul>
-
-                        <li>Basic form</li>
-
-                        <li>Conjugate</li>
-
-                        <li>Modulus</li>
-
-                        <li>Argument</li>
-
-                        <li>Polar form</li>
-
-                        <li>Euler form</li>
-
-                        <li>De Moivre's theorem</li>
-
-                        <li>Roots of complex numbers</li>
-
-                    </ul>
-
-                </article>
-
-
-            </div>
-
-        </section>
-
-
-        <!-- =================================================
-             PHYSICS HUB
-        ================================================== -->
-
-        <section
-            id="physics-hub"
-            class="content-section future-section"
-        >
-
-            <div class="section-heading">
-
-                <p>PHYSICS</p>
-
-                <h2>Physics Formula Hub</h2>
-
-                <span>
-                    Physics laws and formulas will be added here.
-                </span>
-
-            </div>
-
-        </section>
-
-
-                        
+</body></html>
