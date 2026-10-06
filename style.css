@@ -1300,3 +1300,127 @@ a {
 
 /* =========================================================
    2
+/* =========================================================
+   21. RESPONSIVE LAYOUT
+========================================================= */
+
+@media (min-width: 600px) {
+
+    .app-shell {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .home-content,
+    .page-content,
+    .about-content,
+    .future-content {
+        padding-left: 32px;
+        padding-right: 32px;
+    }
+
+    .hub-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+/* =========================================================
+   22. LARGE SCREENS
+========================================================= */
+
+@media (min-width: 900px) {
+
+    .app-shell {
+        max-width: 1100px;
+    }
+
+    .hub-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .formula-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+/* =========================================================
+   23. BUTTON INTERACTION
+========================================================= */
+
+button,
+.card,
+.contact-button,
+.back-button {
+    -webkit-tap-highlight-color: transparent;
+}
+
+button:active,
+.card:active,
+.contact-button:active {
+    transform: scale(0.98);
+}
+
+
+/* =========================================================
+   24. SCROLLBAR
+========================================================= */
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.18);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.30);
+}
+
+
+/* =========================================================
+   25. SELECTION
+========================================================= */
+
+::selection {
+    background: rgba(0, 174, 255, 0.25);
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   26. ACCESSIBILITY
+========================================================= */
+
+button:focus-visible,
+a:focus-visible {
+    outline: 2px solid #00aeff;
+    outline-offset: 3px;
+}
+
+
+/* =========================================================
+   27. NO-SCRIPT / FALLBACK
+========================================================= */
+
+noscript {
+    display: block;
+    padding: 20px;
+    text-align: center;
+    color: #ffffff;
+    background: #101820;
+}
+
+
+/* =========================================================
+   28. END OF STYLE
+========================================================= */
