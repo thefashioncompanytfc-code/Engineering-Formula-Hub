@@ -1,470 +1,1174 @@
 /* =========================================================
-ENGINEERING FORMULA HUB
-MAIN JAVASCRIPT
-========================================================= */
+   FORMULAHUB 2.0
+   MAIN APPLICATION LOGIC
+   ========================================================= */
 
-(function () {
 
-"use strict";
+/* =========================================================
+   1. GLOBAL STATE
+   ========================================================= */
 
-/* =====================================================
-   SPLASH SCREEN
-   ===================================================== */
+const state = {
+    currentScreen: "splash-screen",
 
-function startWebsite() {
+    previousScreen: "home-screen",
 
-    const splash = document.getElementById("splash-screen");
-    const main = document.getElementById("main-content");
+    currentSubject: null,
 
-    console.log("Starting Engineering Formula Hub...");
+    currentChapter: null,
 
-    if (splash) {
-        splash.classList.add("hide");
-        splash.style.display = "none";
+    currentFormula: null,
+
+    history: []
+};
+
+
+/* =========================================================
+   2. SCREEN ELEMENTS
+   ========================================================= */
+
+const screens = {
+    splash: document.getElementById("splash-screen"),
+    home: document.getElementById("home-screen"),
+    subject: document.getElementById("subject-screen"),
+    chapter: document.getElementById("chapter-screen"),
+    formula: document.getElementById("formula-screen"),
+    future: document.getElementById("future-screen"),
+    about: document.getElementById("about-screen")
+};
+
+
+/* =========================================================
+   3. SAFE FORMULA DATABASE ACCESS
+   ========================================================= */
+
+/*
+    formulas.js is intentionally kept separate.
+
+    IMPORTANT:
+    Future formula additions should happen inside:
+
+        data/formulas.js
+
+    The rest of the website should not need editing.
+*/
+
+function getFormulaDatabase() {
+
+    /*
+        We support several possible variable names so the
+        formula database can be changed later without
+        breaking the application.
+    */
+
+    if (typeof FORMULAS !== "undefined") {
+        return FORMULAS;
     }
 
-    if (main) {
-        main.classList.add("show");
-        main.style.display = "block";
+    if (typeof formulas !== "undefined") {
+        return formulas;
     }
 
-    console.log("Website opened successfully.");
+    if (typeof formulaData !== "undefined") {
+        return formulaData;
+    }
+
+    return [];
+}
+
+
+/* =========================================================
+   4. NORMALIZE DATABASE
+   ========================================================= */
+
+function normalizeDatabase() {
+
+    const database = getFormulaDatabase();
+
+    if (Array.isArray(database)) {
+        return database;
+    }
+
+    /*
+        If formulas.js later uses:
+
+        {
+            Maths: [...],
+            Physics: [...],
+            Chemistry: [...]
+        }
+
+        this converts it into one common array.
+    */
+
+    if (
+        database &&
+        typeof database === "object"
+    ) {
+
+        const output = [];
+
+        Object.keys(database).forEach(subject => {
+
+            const subjectItems = database[subject];
+
+            if (!Array.isArray(subjectItems)) {
+                return;
+            }
+
+            subjectItems.forEach(item => {
+
+                output.push({
+                    ...item,
+                    subject:
+                        item.subject || subject
+                });
+
+            });
+
+        });
+
+        return output;
+    }
+
+    return [];
+}
+
+
+/* =========================================================
+   5. DATABASE
+   ========================================================= */
+
+function getAllFormulas() {
+    return normalizeDatabase();
+}
+
+
+/* =========================================================
+   6. SCREEN NAVIGATION
+   ========================================================= */
+
+function showScreen(screenId, addHistory = true) {
+
+    const target = document.getElementById(screenId);
+
+    if (!target) {
+        console.warn(
+            "FormulaHub: Screen not found:",
+            screenId
+        );
+
+        return;
+    }
+
+
+    /*
+        Save current screen before moving forward.
+    */
+
+    if (
+        addHistory &&
+        state.currentScreen !== screenId
+    ) {
+
+        state.history.push(
+            state.currentScreen
+        );
+
+    }
+
+
+    /*
+        Remove active state from every screen.
+    */
+
+    Object.values(screens).forEach(screen => {
+
+        if (screen) {
+            screen.classList.remove("active");
+        }
+
+    });
+
+
+    /*
+        Activate requested screen.
+    */
+
+    target.classList.add("active");
+
+
+    /*
+        Update state.
+    */
+
+    state.currentScreen = screenId;
+
+
+    /*
+        Scroll dynamic areas back to top.
+    */
+
+    resetScrollPosition(target);
+}
+
+
+/* =========================================================
+   7. RESET SCROLL
+   ========================================================= */
+
+function resetScrollPosition(screen) {
+
+    if (!screen) return;
+
+    const scrollAreas =
+        screen.querySelectorAll(
+            ".home-content, .page-content, .formula-content, .about-content"
+        );
+
+    scrollAreas.forEach(area => {
+
+        area.scrollTop = 0;
+
+    });
+}
+
+
+/* =========================================================
+   8. GO BACK
+   ========================================================= */
+
+function goBack() {
+
+    if (state.history.length === 0) {
+
+        showScreen(
+            "home-screen",
+            false
+        );
+
+        return;
+    }
+
+
+    const previous =
+        state.history.pop();
+
+
+    showScreen(
+        previous,
+        false
+    );
+}
+
+
+/* =========================================================
+   9. SPLASH SCREEN
+   ========================================================= */
+
+function startApplication() {
+
+    /*
+        Splash duration:
+        approximately 3 seconds.
+    */
+
+    setTimeout(() => {
+
+        showScreen(
+            "home-screen",
+            false
+        );
+
+    }, 3000);
+}
+
+
+/* =========================================================
+   10. SUBJECT NAVIGATION
+   ========================================================= */
+
+function openSubject(subject) {
+
+    if (!subject) return;
+
+
+    state.currentSubject = subject;
+
+    state.currentChapter = null;
+
+    state.currentFormula = null;
+
+
+    /*
+        Update subject title.
+    */
+
+    const title =
+        document.getElementById(
+            "subject-title"
+        );
+
+    if (title) {
+        title.textContent =
+            `${subject} Hub`;
+    }
+
+
+    /*
+        Update description.
+    */
+
+    const description =
+        document.getElementById(
+            "subject-description"
+        );
+
+    if (description) {
+
+        description.textContent =
+            `Choose a ${subject} chapter to continue.`;
+
+    }
+
+
+    /*
+        Generate chapters.
+    */
+
+    renderChapters(subject);
+
+
+    /*
+        Open subject screen.
+    */
+
+    showScreen(
+        "subject-screen"
+    );
+}
+
+
+/* =========================================================
+   11. GET CHAPTERS
+   ========================================================= */
+
+function getChapters(subject) {
+
+    const formulas =
+        getAllFormulas();
+
+    const chapters = [];
+
+
+    formulas.forEach(formula => {
+
+        if (!formula) return;
+
+        if (
+            String(formula.subject)
+                .toLowerCase() !==
+            String(subject)
+                .toLowerCase()
+        ) {
+            return;
+        }
+
+
+        const chapter =
+            formula.chapter ||
+            formula.topic ||
+            formula.section;
+
+
+        if (!chapter) return;
+
+
+        if (!chapters.includes(chapter)) {
+
+            chapters.push(chapter);
+
+        }
+
+    });
+
+
+    return chapters;
+}
+
+
+/* =========================================================
+   12. RENDER CHAPTERS
+   ========================================================= */
+
+function renderChapters(subject) {
+
+    const container =
+        document.getElementById(
+            "chapter-list"
+        );
+
+    if (!container) return;
+
+
+    container.innerHTML = "";
+
+
+    const chapters =
+        getChapters(subject);
+
+
+    /*
+        No formula data yet.
+    */
+
+    if (chapters.length === 0) {
+
+        container.innerHTML = `
+
+            <div class="coming-soon-card">
+
+                <span class="coming-icon">
+                    ⚙
+                </span>
+
+                <h3>
+                    Chapters Coming Soon
+                </h3>
+
+                <p>
+                    The ${escapeHTML(subject)}
+                    formula library is being prepared.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    /*
+        Create chapter cards.
+    */
+
+    chapters.forEach(
+        (chapter, index) => {
+
+            const card =
+                document.createElement("button");
+
+            card.className =
+                "dynamic-card";
+
+            card.type = "button";
+
+
+            card.innerHTML = `
+
+                <div class="dynamic-card-icon">
+                    ${String(index + 1).padStart(2, "0")}
+                </div>
+
+                <div class="dynamic-card-info">
+
+                    <h3>
+                        ${escapeHTML(chapter)}
+                    </h3>
+
+                    <p>
+                        Open chapter
+                    </p>
+
+                </div>
+
+                <div class="dynamic-card-arrow">
+                    →
+                </div>
+
+            `;
+
+
+            card.addEventListener(
+                "click",
+                () => {
+
+                    openChapter(
+                        subject,
+                        chapter
+                    );
+
+                }
+            );
+
+
+            container.appendChild(card);
+
+        }
+    );
+}
+
+
+/* =========================================================
+   13. OPEN CHAPTER
+   ========================================================= */
+
+function openChapter(
+    subject,
+    chapter
+) {
+
+    state.currentSubject =
+        subject;
+
+    state.currentChapter =
+        chapter;
+
+    state.currentFormula =
+        null;
+
+
+    const title =
+        document.getElementById(
+            "chapter-title"
+        );
+
+    if (title) {
+        title.textContent =
+            chapter;
+    }
+
+
+    const label =
+        document.getElementById(
+            "chapter-subject-label"
+        );
+
+    if (label) {
+        label.textContent =
+            String(subject).toUpperCase();
+    }
+
+
+    renderFormulas(
+        subject,
+        chapter
+    );
+
+
+    showScreen(
+        "chapter-screen"
+    );
+}
+
+
+/* =========================================================
+   14. GET FORMULAS FOR CHAPTER
+   ========================================================= */
+
+function getFormulasForChapter(
+    subject,
+    chapter
+) {
+
+    const formulas =
+        getAllFormulas();
+
+
+    return formulas.filter(
+        formula => {
+
+            if (!formula) {
+                return false;
+            }
+
+
+            const sameSubject =
+                String(formula.subject)
+                    .toLowerCase() ===
+                String(subject)
+                    .toLowerCase();
+
+
+            const formulaChapter =
+                formula.chapter ||
+                formula.topic ||
+                formula.section ||
+                "";
+
+
+            const sameChapter =
+                String(formulaChapter)
+                    .toLowerCase() ===
+                String(chapter)
+                    .toLowerCase();
+
+
+            return (
+                sameSubject &&
+                sameChapter
+            );
+
+        }
+    );
+}
+
+
+/* =========================================================
+   15. RENDER FORMULAS
+   ========================================================= */
+
+function renderFormulas(
+    subject,
+    chapter
+) {
+
+    const container =
+        document.getElementById(
+            "formula-list"
+        );
+
+    if (!container) return;
+
+
+    container.innerHTML = "";
+
+
+    const formulas =
+        getFormulasForChapter(
+            subject,
+            chapter
+        );
+
+
+    /*
+        No formulas in chapter.
+    */
+
+    if (formulas.length === 0) {
+
+        container.innerHTML = `
+
+            <div class="coming-soon-card">
+
+                <span class="coming-icon">
+                    ∑
+                </span>
+
+                <h3>
+                    Formulas Coming Soon
+                </h3>
+
+                <p>
+                    This chapter has been created,
+                    but its formulas are not added yet.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    /*
+        Create formula cards.
+    */
+
+    formulas.forEach(
+        (formula, index) => {
+
+            const card =
+                document.createElement("button");
+
+            card.className =
+                "dynamic-card";
+
+            card.type = "button";
+
+
+            const formulaName =
+                formula.name ||
+                formula.title ||
+                `Formula ${index + 1}`;
+
+
+            card.innerHTML = `
+
+                <div class="dynamic-card-icon">
+                    ∑
+                </div>
+
+                <div class="dynamic-card-info">
+
+                    <h3>
+                        ${escapeHTML(formulaName)}
+                    </h3>
+
+                    <p>
+                        View formula & example
+                    </p>
+
+                </div>
+
+                <div class="dynamic-card-arrow">
+                    →
+                </div>
+
+            `;
+
+
+            card.addEventListener(
+                "click",
+                () => {
+
+                    openFormula(
+                        formula
+                    );
+
+                }
+            );
+
+
+            container.appendChild(card);
+
+        }
+    );
+}
+
+
+/* =========================================================
+   16. OPEN FORMULA
+   ========================================================= */
+
+function openFormula(formula) {
+
+    if (!formula) return;
+
+
+    state.currentFormula =
+        formula;
+
+
+    /*
+        Formula title
+    */
+
+    const title =
+        document.getElementById(
+            "formula-title"
+        );
+
+
+    if (title) {
+
+        title.textContent =
+            formula.name ||
+            formula.title ||
+            "Formula";
+
+    }
+
+
+    /*
+        Formula image
+    */
+
+    const image =
+        document.getElementById(
+            "formula-image"
+        );
+
+    const placeholder =
+        document.getElementById(
+            "formula-image-placeholder"
+        );
+
+
+    const imagePath =
+        formula.image ||
+        formula.imageUrl ||
+        formula.formulaImage;
+
+
+    if (
+        imagePath &&
+        image
+    ) {
+
+        image.src = imagePath;
+
+        image.style.display =
+            "block";
+
+
+        if (placeholder) {
+
+            placeholder.style.display =
+                "none";
+
+        }
+
+
+        /*
+            If image fails, show fallback.
+        */
+
+        image.onerror = () => {
+
+            image.style.display =
+                "none";
+
+
+            if (placeholder) {
+
+                placeholder.style.display =
+                    "block";
+
+                placeholder.textContent =
+                    "Formula image unavailable";
+
+            }
+
+        };
+
+    } else {
+
+        if (image) {
+
+            image.style.display =
+                "none";
+
+        }
+
+
+        if (placeholder) {
+
+            placeholder.style.display =
+                "block";
+
+            placeholder.textContent =
+                "Formula image will appear here";
+
+        }
+
+    }
+
+
+    /*
+        Terms
+    */
+
+    setFormulaField(
+        "formula-terms",
+        formatTerms(
+            formula.terms ||
+            formula.variables ||
+            formula.where
+        )
+    );
+
+
+    /*
+        Unit
+    */
+
+    setFormulaField(
+        "formula-unit",
+        formula.unit ||
+        formula.units ||
+        "—"
+    );
+
+
+    /*
+        Example
+    */
+
+    setFormulaField(
+        "formula-example",
+        formula.example ||
+        formula.examples ||
+        "—"
+    );
+
+
+    /*
+        Note
+    */
+
+    const noteCard =
+        document.getElementById(
+            "formula-note-card"
+        );
+
+    const note =
+        document.getElementById(
+            "formula-note"
+        );
+
+
+    if (
+        formula.note ||
+        formula.notes
+    ) {
+
+        if (noteCard) {
+            noteCard.style.display =
+                "block";
+        }
+
+        if (note) {
+
+            note.textContent =
+                formula.note ||
+                formula.notes;
+
+        }
+
+    } else {
+
+        if (noteCard) {
+            noteCard.style.display =
+                "none";
+        }
+
+    }
+
+
+    showScreen(
+        "formula-screen"
+    );
+}
+
+
+/* =========================================================
+   17. SET FORMULA FIELD
+   ========================================================= */
+
+function setFormulaField(
+    elementId,
+    value
+) {
+
+    const element =
+        document.getElementById(
+            elementId
+        );
+
+
+    if (!element) return;
+
+
+    if (
+        value === null ||
+        value === undefined ||
+        value === ""
+    ) {
+
+        element.textContent = "—";
+
+        return;
+    }
+
+
+    element.textContent =
+        String(value);
+}
+
+
+/* =========================================================
+   18. FORMAT TERMS
+   ========================================================= */
+
+function formatTerms(terms) {
+
+    if (!terms) {
+        return "—";
+    }
+
+
+    /*
+        Array:
+
+        [
+            "F = Force",
+            "m = Mass"
+        ]
+    */
+
+    if (Array.isArray(terms)) {
+
+        return terms.join("\n");
+
+    }
+
+
+    return String(terms);
+}
+
+
+/* =========================================================
+   19. FUTURE ENGINEERS
+   ========================================================= */
+
+function openFutureEngineers() {
+
+    showScreen(
+        "future-screen"
+    );
+}
+
+
+/* =========================================================
+   20. ABOUT PAGE
+   ========================================================= */
+
+function openAbout() {
+
+    showScreen(
+        "about-screen"
+    );
+}
+
+
+/* =========================================================
+   21. EVENT HANDLER SYSTEM
+   ========================================================= */
+
+function setupActions() {
+
+    /*
+        Subject buttons
+    */
+
+    document
+        .querySelectorAll(
+            '[data-action="subject"]'
+        )
+        .forEach(button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    const subject =
+                        button.dataset.subject;
+
+                    openSubject(
+                        subject
+                    );
+
+                }
+            );
+
+        });
+
+
+    /*
+        Future Engineers
+    */
+
+    document
+        .querySelectorAll(
+            '[data-action="future-engineers"]'
+        )
+        .forEach(button => {
+
+            button.addEventListener(
+                "click",
+                openFutureEngineers
+            );
+
+        });
+
+
+    /*
+        About
+    */
+
+    document
+        .querySelectorAll(
+            '[data-action="about"]'
+        )
+        .forEach(button => {
+
+            button.addEventListener(
+                "click",
+                openAbout
+            );
+
+        });
+
+
+    /*
+        Back buttons
+    */
+
+    document
+        .querySelectorAll(
+            '[data-action="back"]'
+        )
+        .forEach(button => {
+
+            button.addEventListener(
+                "click",
+                goBack
+            );
+
+        });
 
 }
 
 
-/* =====================================================
-   START AFTER PAGE LOAD
-   ===================================================== */
+/* =========================================================
+   22. ANDROID / BROWSER BACK BUTTON
+   ========================================================= */
 
-window.addEventListener("load", function () {
+window.addEventListener(
+    "popstate",
+    () => {
 
-    console.log("All files loaded.");
+        goBack();
 
-    setTimeout(startWebsite, 2500);
-
-});
-
-
-/* =====================================================
-   SHOW SECTION
-   ===================================================== */
-
-window.showSection = function (sectionId) {
-
-    const section = document.getElementById(sectionId);
-
-    if (!section) {
-        console.warn("Section not found:", sectionId);
-        return;
     }
-
-    section.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-    });
-
-};
+);
 
 
-/* =====================================================
-   BASIC MATHEMATICS
-   ===================================================== */
+/* =========================================================
+   23. SECURITY / SAFE TEXT
+   ========================================================= */
 
-window.openBasicMathematics = function () {
+function escapeHTML(value) {
 
     if (
-        typeof formulaDatabase === "undefined" ||
-        !formulaDatabase.basicMathematics
+        value === null ||
+        value === undefined
     ) {
-
-        alert("Basic Mathematics formulas could not be loaded.");
-
-        return;
-
+        return "";
     }
 
 
-    const formulas = formulaDatabase.basicMathematics;
-
-    let page =
-        document.getElementById("basic-mathematics-page");
-
-
-    if (!page) {
-
-        page = document.createElement("section");
-
-        page.id = "basic-mathematics-page";
-
-        page.style.minHeight = "100vh";
-        page.style.padding = "40px 20px";
-        page.style.background = "#0b0b0b";
-        page.style.color = "#ffffff";
-
-
-        /* HEADER */
-
-        const header = document.createElement("div");
-
-        header.style.maxWidth = "1100px";
-        header.style.margin = "0 auto 35px";
-
-
-        const back = document.createElement("button");
-
-        back.textContent = "← Back to Maths Hub";
-
-        back.style.padding = "12px 20px";
-        back.style.border = "1px solid #ff8a00";
-        back.style.background = "transparent";
-        back.style.color = "#ff8a00";
-        back.style.borderRadius = "8px";
-        back.style.cursor = "pointer";
-
-
-        back.addEventListener("click", function () {
-
-            const maths =
-                document.getElementById("maths-hub");
-
-            if (maths) {
-
-                maths.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start"
-                });
-
-            }
-
-        });
-
-
-        const title = document.createElement("h1");
-
-        title.textContent = "Basic Mathematics";
-
-        title.style.color = "#ff8a00";
-        title.style.marginTop = "25px";
-
-
-        const subtitle = document.createElement("p");
-
-        subtitle.textContent =
-            "Fundamental mathematical formulas for engineering.";
-
-        subtitle.style.color = "#bbbbbb";
-
-
-        const count = document.createElement("div");
-
-        count.textContent =
-            formulas.length + " formulas available";
-
-        count.style.marginTop = "15px";
-        count.style.color = "#ff8a00";
-
-
-        header.appendChild(back);
-        header.appendChild(title);
-        header.appendChild(subtitle);
-        header.appendChild(count);
-
-
-        /* FORMULA GRID */
-
-        const grid = document.createElement("div");
-
-        grid.style.maxWidth = "1100px";
-        grid.style.margin = "0 auto";
-
-        grid.style.display = "grid";
-
-        grid.style.gridTemplateColumns =
-            "repeat(auto-fit, minmax(260px, 1fr))";
-
-        grid.style.gap = "18px";
-
-
-        formulas.forEach(function (formula, index) {
-
-            const card = document.createElement("div");
-
-            card.style.background = "#151515";
-            card.style.border = "1px solid #2d2d2d";
-            card.style.borderRadius = "14px";
-            card.style.padding = "22px";
-
-
-            const number =
-                document.createElement("div");
-
-            number.textContent =
-                String(index + 1).padStart(2, "0");
-
-            number.style.color = "#777";
-            number.style.marginBottom = "10px";
-
-
-            const name =
-                document.createElement("h3");
-
-            name.textContent = formula.name;
-
-            name.style.color = "#ffffff";
-
-
-            const expression =
-                document.createElement("div");
-
-            expression.textContent =
-                formula.formula;
-
-            expression.style.marginTop = "15px";
-            expression.style.padding = "14px";
-            expression.style.background = "#0d0d0d";
-            expression.style.color = "#ff8a00";
-            expression.style.borderRadius = "8px";
-            expression.style.fontSize = "20px";
-
-
-            card.appendChild(number);
-            card.appendChild(name);
-            card.appendChild(expression);
-
-            grid.appendChild(card);
-
-        });
-
-
-        page.appendChild(header);
-        page.appendChild(grid);
-
-
-        const mathsHub =
-            document.getElementById("maths-hub");
-
-
-        if (mathsHub) {
-
-            mathsHub.parentNode.insertBefore(
-                page,
-                mathsHub.nextSibling
-            );
-
-        }
-
-    }
-
-
-    page.style.display = "block";
-
-    page.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-    });
-
-};
-
-
-/* =====================================================
-   DOM READY
-   ===================================================== */
-
-document.addEventListener("DOMContentLoaded", function () {
-
-    console.log("DOM ready.");
-
-    /* BASIC MATH CARD */
-
-    const mathsHub =
-        document.getElementById("maths-hub");
-
-
-    if (mathsHub) {
-
-        const cards =
-            mathsHub.querySelectorAll(".formula-category");
-
-
-        cards.forEach(function (card) {
-
-            const heading =
-                card.querySelector("h3");
-
-
-            if (!heading) return;
-
-
-            if (
-                heading.textContent
-                    .trim()
-                    .toLowerCase()
-                    .includes("basic mathematics")
-            ) {
-
-                card.style.cursor = "pointer";
-
-                card.addEventListener(
-                    "click",
-                    window.openBasicMathematics
-                );
-
-            }
-
-        });
-
-    }
-
-
-    /* SEARCH */
-
-    const searchInput =
-        document.getElementById("formula-search");
-
-    const searchButton =
-        document.getElementById("search-btn");
-
-
-    function performSearch() {
-
-        if (!searchInput) return;
-
-
-        const query =
-            searchInput.value.trim();
-
-
-        if (!query) return;
-
-
-        if (
-            typeof searchFormulaDatabase === "function"
-        ) {
-
-            const results =
-                searchFormulaDatabase(query);
-
-
-            console.log(
-                "Search results:",
-                results
-            );
-
-
-            if (results.length === 0) {
-
-                alert(
-                    "No formula found for: " + query
-                );
-
-                return;
-
-            }
-
-
-            const basicResult =
-                results.find(function (formula) {
-
-                    return (
-                        formulaDatabase.basicMathematics &&
-                        formulaDatabase.basicMathematics.some(
-                            function (item) {
-                                return item.id === formula.id;
-                            }
-                        )
-                    );
-
-                });
-
-
-            if (basicResult) {
-
-                window.openBasicMathematics();
-
-            }
-
-        }
-
-    }
-
-
-    if (searchButton) {
-
-        searchButton.addEventListener(
-            "click",
-            performSearch
-        );
-
-    }
-
-
-    if (searchInput) {
-
-        searchInput.addEventListener(
-            "keydown",
-            function (event) {
-
-                if (event.key === "Enter") {
-                    performSearch();
-                }
-
-            }
-        );
-
-    }
-
-
-    /* BACK TO TOP */
-
-    const backToTop =
-        document.getElementById("back-to-top");
-
-
-    if (backToTop) {
-
-        backToTop.addEventListener(
-            "click",
-            function () {
-
-                window.scrollTo({
-                    top: 0,
-                    behavior: "smooth"
-                });
-
-            }
-        );
-
-    }
-
-
-    /* "/" SEARCH SHORTCUT */
-
-    document.addEventListener(
-        "keydown",
-        function (event) {
-
-            if (
-                event.key === "/" &&
-                document.activeElement !== searchInput
-            ) {
-
-                event.preventDefault();
-
-                if (searchInput) {
-                    searchInput.focus();
-                }
-
-            }
-
-        }
-    );
-
-
-    console.log(
-        "Engineering Formula Hub JavaScript loaded."
-    );
-
-});
-
-})();
+    return String(value)
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+     
