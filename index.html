@@ -1,679 +1,841 @@
-<!DOCTYPE html><html lang="en"><head>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Engineering Formula Hub</title>
 
-<meta name="description"
-    content="Engineering Formula Hub — Mathematics, Physics, Laws, Chemistry and Engineering formulas for future engineers.">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-<link rel="stylesheet" href="style.css">
+    <meta name="theme-color" content="#0a0f16">
 
-</head><body><!-- =====================================================
-     SPLASH SCREEN
-====================================================== -->
+    <meta name="description"
+        content="FormulaHub — A simple engineering formula companion for future engineers.">
 
-<section id="splash-screen" class="splash-screen">
+    <title>FormulaHub 2.0</title>
 
-    <div class="splash-content">
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-        <div class="gear">⚙</div>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@500;600;700&display=swap"
+        rel="stylesheet">
 
-        <h1>Formula Hub for All Future Er's</h1>
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
 
-        <p>Created by Rihan</p>
+<body>
 
-        <div class="loading-line">
-            <span></span>
-        </div>
+    <!-- =====================================================
+         APPLICATION CONTAINER
+    ====================================================== -->
 
-        <small>Loading Engineering Formula Hub...</small>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     MAIN WEBSITE
-====================================================== -->
-
-<main id="main-content" class="main-content">
+    <div id="app">
 
 
-    <!-- =================================================
-         HEADER
-    ================================================== -->
+        <!-- =================================================
+             1. SPLASH SCREEN
+        ================================================== -->
 
-    <header class="header">
+        <section id="splash-screen" class="screen active">
 
-        <div class="brand">
+            <div class="splash-content">
 
-            <span class="brand-icon">⚙️</span>
+                <div class="splash-line"></div>
 
-            <div>
+                <h1 class="splash-title">
+                    FORMULA HUB
+                </h1>
 
-                <h1>Engineering Formula Hub</h1>
+                <p class="splash-subtitle">
+                    BY RIHAN S.
+                </p>
 
-                <p>Your Formula Reference for Engineering</p>
+                <div class="splash-line"></div>
 
             </div>
 
-        </div>
+        </section>
 
-    </header>
 
+        <!-- =================================================
+             2. HOME SCREEN
+        ================================================== -->
 
-    <!-- =================================================
-         HERO
-    ================================================== -->
+        <section id="home-screen" class="screen">
 
-    <section class="hero">
+            <header class="top-header">
 
-        <p class="hero-small">
-            WELCOME, FUTURE ENGINEER
-        </p>
+                <div class="brand">
+                    <span class="brand-mark">Σ</span>
 
-        <h2>
-            Engineering formulas.<br>
-            All in one place.
-        </h2>
+                    <div>
+                        <h1>FormulaHub</h1>
+                        <p>Engineering made simpler.</p>
+                    </div>
+                </div>
 
-        <p class="hero-text">
-            Mathematics, Physics, Laws, Chemistry and
-            engineering formulas — organized for quick learning.
-        </p>
+            </header>
 
 
-        <!-- SEARCH -->
+            <main class="home-content">
 
-        <div class="search-box">
+                <div class="hero-text">
 
-            <input
-                type="search"
-                id="formula-search"
-                placeholder="Search a formula, topic or concept..."
-                autocomplete="off"
-            >
+                    <span class="eyebrow">
+                        ENGINEERING FORMULA COMPANION
+                    </span>
 
-            <button
-                type="button"
-                id="search-btn"
-            >
-                Search
-            </button>
+                    <h2>
+                        Choose your<br>
+                        <span>Hub.</span>
+                    </h2>
 
-        </div>
+                    <p>
+                        Less searching. Less confusion.
+                        More engineering.
+                    </p>
 
-    </section>
+                </div>
 
 
-    <!-- =================================================
-         ENGINEERING HUBS
-    ================================================== -->
+                <!-- SUBJECT HUBS -->
 
-    <section class="hub-section">
+                <div class="hub-grid">
 
-        <div class="section-heading">
+                    <!-- Maths -->
 
-            <p>EXPLORE</p>
+                    <button class="hub-card"
+                        data-action="subject"
+                        data-subject="Maths">
 
-            <h2>Engineering Hubs</h2>
+                        <div class="card-icon">
+                            ∑
+                        </div>
 
-        </div>
+                        <div class="card-text">
 
+                            <span class="card-number">
+                                01
+                            </span>
 
-        <div class="hub-grid">
+                            <h3>
+                                Maths
+                            </h3>
 
+                            <p>
+                                Engineering Mathematics
+                            </p>
 
-            <!-- MATHS -->
+                        </div>
 
-            <button
-                class="hub-card"
-                type="button"
-                onclick="showSection('maths-hub')"
-            >
+                        <span class="card-arrow">
+                            →
+                        </span>
 
-                <span class="card-icon">📐</span>
+                    </button>
 
-                <h3>Maths Hub</h3>
 
-                <p>
-                    Mathematics formulas from basics
-                    to engineering mathematics.
-                </p>
+                    <!-- Physics -->
 
-                <span class="card-arrow">→</span>
+                    <button class="hub-card"
+                        data-action="subject"
+                        data-subject="Physics">
 
-            </button>
+                        <div class="card-icon">
+                            Φ
+                        </div>
 
+                        <div class="card-text">
 
-            <!-- PHYSICS -->
+                            <span class="card-number">
+                                02
+                            </span>
 
-            <button
-                class="hub-card"
-                type="button"
-                onclick="showSection('physics-hub')"
-            >
+                            <h3>
+                                Physics
+                            </h3>
 
-                <span class="card-icon">⚡</span>
+                            <p>
+                                Laws, quantities & equations
+                            </p>
 
-                <h3>Physics</h3>
+                        </div>
 
-                <p>
-                    Important physics laws, equations
-                    and engineering formulas.
-                </p>
+                        <span class="card-arrow">
+                            →
+                        </span>
 
-                <span class="card-arrow">→</span>
+                    </button>
 
-            </button>
 
+                    <!-- Chemistry -->
 
-            <!-- LAWS -->
+                    <button class="hub-card"
+                        data-action="subject"
+                        data-subject="Chemistry">
 
-            <button
-                class="hub-card"
-                type="button"
-                onclick="showSection('laws-hub')"
-            >
+                        <div class="card-icon">
+                            ⚗
+                        </div>
 
-                <span class="card-icon">📜</span>
+                        <div class="card-text">
 
-                <h3>Laws &amp; Formulae</h3>
+                            <span class="card-number">
+                                03
+                            </span>
 
-                <p>
-                    Important scientific laws and
-                    fundamental equations.
-                </p>
+                            <h3>
+                                Chemistry
+                            </h3>
 
-                <span class="card-arrow">→</span>
+                            <p>
+                                Engineering Chemistry
+                            </p>
 
-            </button>
+                        </div>
 
+                        <span class="card-arrow">
+                            →
+                        </span>
 
-            <!-- CHEMISTRY -->
+                    </button>
 
-            <button
-                class="hub-card"
-                type="button"
-                onclick="showSection('chemistry-hub')"
-            >
+                </div>
 
-                <span class="card-icon">🧪</span>
 
-                <h3>Chemistry Basics</h3>
+                <!-- FUTURE ENGINEERS -->
 
-                <p>
-                    Essential chemistry formulas,
-                    equations and concepts.
-                </p>
+                <button class="future-engineers-card"
+                    data-action="future-engineers">
 
-                <span class="card-arrow">→</span>
+                    <div class="future-icon">
+                        ⚙
+                    </div>
 
-            </button>
+                    <div>
 
-        </div>
+                        <span class="eyebrow">
+                            FOR THE NEXT GENERATION
+                        </span>
 
-    </section>
+                        <h3>
+                            For Future Engineers
+                        </h3>
 
+                        <p>
+                            Books, ideas & inspiration worth exploring.
+                        </p>
 
-    <!-- =================================================
-         MATHS HUB
-    ================================================== -->
+                    </div>
 
-    <section
-        id="maths-hub"
-        class="content-section"
-    >
+                    <span class="card-arrow">
+                        →
+                    </span>
 
-        <div class="section-heading">
+                </button>
 
-            <p>MATHEMATICS</p>
+            </main>
 
-            <h2>Maths Formula Hub</h2>
 
-            <span>
-                Essential mathematics for every engineering branch.
-            </span>
+            <!-- HOME FOOTER -->
 
-        </div>
+            <footer class="main-footer">
 
+                <button
+                    class="footer-button"
+                    data-action="about">
 
-        <div class="maths-grid">
+                    About FormulaHub
 
+                </button>
 
-            <!-- 01 -->
+                <span class="footer-divider">
+                    •
+                </span>
 
-            <article class="formula-category">
+                <span>
+                    Built for Engineers
+                </span>
 
-                <div class="category-number">01</div>
+            </footer>
 
-                <h3>Basic Mathematics</h3>
+        </section>
 
-                <p class="category-description">
-                    Fundamental mathematical operations
-                    and concepts.
-                </p>
 
-                <ul>
-                    <li>Addition</li>
-                    <li>Subtraction</li>
-                    <li>Multiplication</li>
-                    <li>Division</li>
-                    <li>Fractions</li>
-                    <li>Ratio &amp; proportion</li>
-                    <li>Percentage</li>
-                    <li>Powers &amp; roots</li>
-                    <li>Indices</li>
-                    <li>BODMAS</li>
-                    <li>Scientific notation</li>
-                    <li>Approximation</li>
-                    <li>Basic algebraic manipulation</li>
-                </ul>
+        <!-- =================================================
+             3. SUBJECT SCREEN
+        ================================================== -->
 
-            </article>
+        <section id="subject-screen" class="screen">
 
+            <header class="page-header">
 
-            <!-- 02 -->
+                <button
+                    class="back-button"
+                    data-action="back">
 
-            <article class="formula-category">
+                    ←
 
-                <div class="category-number">02</div>
+                </button>
 
-                <h3>Algebra</h3>
+                <div>
 
-                <p class="category-description">
-                    Algebraic identities, equations
-                    and functions.
-                </p>
+                    <span class="page-label">
+                        FORMULA HUB
+                    </span>
 
-                <ul>
-                    <li>Algebraic identities</li>
-                    <li>Factorisation</li>
-                    <li>Linear equations</li>
-                    <li>Simultaneous equations</li>
-                    <li>Quadratic equations</li>
-                    <li>Roots &amp; discriminant</li>
-                    <li>Polynomials</li>
-                    <li>Partial fractions</li>
-                    <li>Progressions</li>
-                    <li class="sub-item">AP</li>
-                    <li class="sub-item">GP</li>
-                    <li class="sub-item">HP</li>
-                    <li>Binomial theorem</li>
-                    <li>Permutation &amp; combination</li>
-                    <li>Logarithms</li>
-                    <li>Exponential functions</li>
-                </ul>
+                    <h2 id="subject-title">
+                        Maths
+                    </h2>
 
-            </article>
+                </div>
 
+            </header>
 
-            <!-- 03 -->
 
-            <article class="formula-category">
+            <main class="page-content">
 
-                <div class="category-number">03</div>
+                <div class="section-intro">
 
-                <h3>Trigonometry</h3>
+                    <p id="subject-description">
+                        Select a chapter to continue.
+                    </p>
 
-                <p class="category-description">
-                    Trigonometric identities, equations
-                    and functions.
-                </p>
+                </div>
 
-                <ul>
-                    <li>Basic ratios</li>
-                    <li>Reciprocal identities</li>
-                    <li>Pythagorean identities</li>
-                    <li>Allied angles</li>
-                    <li>Compound angles</li>
-                    <li>Multiple angles</li>
-                    <li>Half angles</li>
-                    <li>Product-to-sum</li>
-                    <li>Sum-to-product</li>
-                    <li>Inverse trigonometry</li>
-                    <li>General solutions</li>
-                    <li>Triangle formulas</li>
-                </ul>
 
-            </article>
+                <!-- JS WILL GENERATE CHAPTER CARDS HERE -->
 
+                <div
+                    id="chapter-list"
+                    class="dynamic-list">
 
-            <!-- 04 -->
+                    <div class="loading-message">
+                        Loading chapters...
+                    </div>
 
-            <article class="formula-category">
+                </div>
 
-                <div class="category-number">04</div>
+            </main>
 
-                <h3>Coordinate Geometry</h3>
+        </section>
 
-                <p class="category-description">
-                    Geometry formulas used in mathematics
-                    and engineering.
-                </p>
 
-                <ul>
-                    <li>Distance</li>
-                    <li>Section</li>
-                    <li>Midpoint</li>
-                    <li>Slope</li>
-                    <li>Straight line</li>
-                    <li>Angle between lines</li>
-                    <li>Distance from point to line</li>
-                    <li>Circle</li>
-                    <li>Parabola</li>
-                    <li>Ellipse</li>
-                    <li>Hyperbola</li>
-                    <li>Polar coordinates</li>
-                </ul>
+        <!-- =================================================
+             4. CHAPTER SCREEN
+        ================================================== -->
 
-            </article>
+        <section id="chapter-screen" class="screen">
 
+            <header class="page-header">
 
-            <!-- 05 -->
+                <button
+                    class="back-button"
+                    data-action="back">
 
-            <article class="formula-category featured-category">
+                    ←
 
-                <div class="category-number">05</div>
+                </button>
 
-                <h3>Differentiation</h3>
+                <div>
 
-                <p class="category-description">
-                    Detailed differentiation rules
-                    and applications.
-                </p>
+                    <span
+                        id="chapter-subject-label"
+                        class="page-label">
 
-                <ul>
-                    <li>Basic derivative rules</li>
-                    <li>Constant rule</li>
-                    <li>Power rule</li>
-                    <li>Sum/difference rule</li>
-                    <li>Product rule</li>
-                    <li>Quotient rule</li>
-                    <li>Chain rule</li>
-                    <li>Trigonometric derivatives</li>
-                    <li>Inverse-trig derivatives</li>
-                    <li>Exponential derivatives</li>
-                    <li>Logarithmic derivatives</li>
-                    <li>Implicit differentiation</li>
-                    <li>Parametric differentiation</li>
-                    <li>Higher-order derivatives</li>
-                    <li>Partial derivatives</li>
-                    <li>Total derivatives</li>
-                    <li>Maxima &amp; minima</li>
-                    <li>Tangent &amp; normal</li>
-                    <li>Rate of change</li>
-                </ul>
+                        MATHS
 
-            </article>
+                    </span>
 
+                    <h2 id="chapter-title">
+                        Chapter
+                    </h2>
 
-            <!-- 06 -->
+                </div>
 
-            <article class="formula-category featured-category">
+            </header>
 
-                <div class="category-number">06</div>
 
-                <h3>Integration</h3>
+            <main class="page-content">
 
-                <p class="category-description">
-                    Integration formulas, methods
-                    and applications.
-                </p>
+                <div class="section-intro">
 
-                <ul>
-                    <li>Basic integration formulas</li>
-                    <li>Power rule</li>
-                    <li>Trigonometric integration</li>
-                    <li>Inverse-trig forms</li>
-                    <li>Exponential</li>
-                    <li>Logarithmic</li>
-                    <li>Substitution</li>
-                    <li>Integration by parts</li>
-                    <li>Partial fractions</li>
-                    <li>Definite integrals</li>
-                    <li>Properties of definite integrals</li>
-                    <li>Area under curve</li>
-                    <li>Area between curves</li>
-                    <li>Volume</li>
-                </ul>
+                    <p>
+                        Select a formula to view its details.
+                    </p>
 
-            </article>
+                </div>
 
 
-            <!-- 07 -->
+                <!-- JS WILL GENERATE FORMULA LIST HERE -->
 
-            <article class="formula-category">
+                <div
+                    id="formula-list"
+                    class="dynamic-list">
 
-                <div class="category-number">07</div>
+                    <div class="loading-message">
+                        Loading formulas...
+                    </div>
 
-                <h3>Differential Equations</h3>
+                </div>
 
-                <p class="category-description">
-                    Important differential equation
-                    methods for engineering.
-                </p>
+            </main>
 
-                <ul>
-                    <li>Order &amp; degree</li>
-                    <li>Variable separable</li>
-                    <li>Homogeneous</li>
-                    <li>Linear differential equations</li>
-                    <li>First-order equations</li>
-                    <li>Higher-order equations</li>
-                    <li>Complementary function</li>
-                    <li>Particular integral</li>
-                    <li>Basic engineering applications</li>
-                </ul>
+        </section>
 
-            </article>
 
+        <!-- =================================================
+             5. FORMULA VIEWER
+        ================================================== -->
 
-            <!-- 08 -->
+        <section id="formula-screen" class="screen">
 
-            <article class="formula-category">
+            <header class="page-header">
 
-                <div class="category-number">08</div>
+                <button
+                    class="back-button"
+                    data-action="back">
 
-                <h3>Matrices &amp; Determinants</h3>
+                    ←
 
-                <p class="category-description">
-                    Matrix operations, determinants
-                    and linear algebra.
-                </p>
+                </button>
 
-                <ul>
-                    <li>Matrix operations</li>
-                    <li>Types of matrices</li>
-                    <li>Transpose</li>
-                    <li>Determinant</li>
-                    <li>Minor/cofactor</li>
-                    <li>Adjoint</li>
-                    <li>Inverse</li>
-                    <li>Rank</li>
-                    <li>Eigenvalues</li>
-                    <li>Eigenvectors</li>
-                    <li>Cayley-Hamilton</li>
-                    <li>Simultaneous equations</li>
-                </ul>
+                <div>
 
-            </article>
+                    <span class="page-label">
+                        FORMULA
+                    </span>
 
+                    <h2 id="formula-title">
+                        Formula
+                    </h2>
 
-            <!-- 09 -->
+                </div>
 
-            <article class="formula-category">
+            </header>
 
-                <div class="category-number">09</div>
 
-                <h3>Vector Algebra</h3>
+            <main class="formula-content">
 
-                <p class="category-description">
-                    Vectors and their applications
-                    in engineering mathematics.
-                </p>
 
-                <ul>
-                    <li>Vector magnitude</li>
-                    <li>Unit vector</li>
-                    <li>Addition/subtraction</li>
-                    <li>Dot product</li>
-                    <li>Cross product</li>
-                    <li>Projection</li>
-                    <li>Scalar triple product</li>
-                    <li>Vector triple product</li>
-                    <li>Direction cosines</li>
-                    <li>Lines and planes</li>
-                </ul>
+                <!-- FORMULA IMAGE -->
 
-            </article>
+                <div class="formula-image-box">
 
+                    <div
+                        id="formula-image-placeholder"
+                        class="formula-placeholder">
 
-            <!-- 10 -->
+                        Formula Image
 
-            <article class="formula-category">
+                    </div>
 
-                <div class="category-number">10</div>
+                    <img
+                        id="formula-image"
+                        src=""
+                        alt="Engineering Formula"
+                        loading="lazy"
+                        style="display: none;">
 
-                <h3>Complex Numbers</h3>
+                </div>
 
-                <p class="category-description">
-                    Essential complex-number formulas
-                    and representations.
-                </p>
 
-                <ul>
-                    <li>Basic form</li>
-                    <li>Conjugate</li>
-                    <li>Modulus</li>
-                    <li>Argument</li>
-                    <li>Polar form</li>
-                    <li>Euler form</li>
-                    <li>De Moivre's theorem</li>
-                    <li>Roots of complex numbers</li>
-                </ul>
+                <!-- TERMS -->
 
-            </article>
+                <div class="info-card">
 
+                    <span class="info-label">
+                        TERMS
+                    </span>
 
-        </div>
+                    <div
+                        id="formula-terms"
+                        class="info-content">
 
-    </section>
+                        —
 
+                    </div>
 
-    <!-- =================================================
-         PHYSICS HUB
-    ================================================== -->
+                </div>
 
-    <section
-        id="physics-hub"
-        class="content-section future-section"
-    >
 
-        <div class="section-heading">
+                <!-- UNIT -->
 
-            <p>PHYSICS</p>
+                <div class="info-card">
 
-            <h2>Physics Formula Hub</h2>
+                    <span class="info-label">
+                        SI UNIT
+                    </span>
 
-            <span>
-                Physics laws and formulas will be added here.
-            </span>
+                    <div
+                        id="formula-unit"
+                        class="info-content">
 
-        </div>
+                        —
 
-    </section>
+                    </div>
 
+                </div>
 
-    <!-- =================================================
-         LAWS HUB
-    ================================================== -->
 
-    <section
-        id="laws-hub"
-        class="content-section future-section"
-    >
+                <!-- EXAMPLE -->
 
-        <div class="section-heading">
+                <div class="info-card">
 
-            <p>LAWS</p>
+                    <span class="info-label">
+                        EXAMPLE
+                    </span>
 
-            <h2>Laws &amp; Formulae</h2>
+                    <div
+                        id="formula-example"
+                        class="info-content">
 
-            <span>
-                Important scientific laws and equations
-                will be added here.
-            </span>
+                        —
 
-        </div>
+                    </div>
 
-    </section>
+                </div>
 
 
-    <!-- =================================================
-         CHEMISTRY HUB
-    ================================================== -->
+                <!-- NOTE -->
 
-    <section
-        id="chemistry-hub"
-        class="content-section future-section"
-    >
+                <div
+                    id="formula-note-card"
+                    class="info-card note-card">
 
-        <div class="section-heading">
+                    <span class="info-label">
+                        ENGINEER'S NOTE
+                    </span>
 
-            <p>CHEMISTRY</p>
+                    <div
+                        id="formula-note"
+                        class="info-content">
 
-            <h2>Chemistry Basics</h2>
+                        —
 
-            <span>
-                Essential chemistry formulas and equations
-                will be added here.
-            </span>
+                    </div>
 
-        </div>
+                </div>
 
-    </section>
 
+                <!-- WRONG FORMULA REPORT -->
 
-    <!-- =================================================
-         FOOTER
-    ================================================== -->
+                <div class="formula-feedback-box">
 
-    <footer class="footer">
+                    <span class="feedback-icon">
+                        🛠️
+                    </span>
 
-        <p>
-            Engineering Formula Hub
-        </p>
+                    <div>
 
-        <span>
-            Created by Rihan • Built for future engineers
-        </span>
+                        <h3>
+                            Found something wrong?
+                        </h3>
 
-    </footer>
+                        <p>
+                            Even engineers make mistakes.
+                            If you notice an incorrect formula,
+                            missing information, or a correction,
+                            let Rihan know directly.
+                        </p>
 
+                        <a
+                            href="mailto:rihan174529@gmail.com?subject=FormulaHub%20Correction"
+                            class="feedback-button">
 
-    <!-- =================================================
-         BACK TO TOP
-    ================================================== -->
+                            Report a correction →
 
-    <button
-        id="back-to-top"
-        class="back-to-top"
-        type="button"
-    >
-        ↑
-    </button>
+                        </a>
 
+                    </div>
 
-</main>
+                </div>
 
+            </main>
 
-<!-- =====================================================
-     JAVASCRIPT
-     IMPORTANT: DATABASE FIRST, MAIN SCRIPT SECOND
-====================================================== -->
+        </section>
 
-<script src="formulas.js"></script>
-<script src="script.js"></script>
 
-</body></html>
+        <!-- =================================================
+             6. FUTURE ENGINEERS / READING SCREEN
+        ================================================== -->
+
+        <section id="future-screen" class="screen">
+
+            <header class="page-header">
+
+                <button
+                    class="back-button"
+                    data-action="back">
+
+                    ←
+
+                </button>
+
+                <div>
+
+                    <span class="page-label">
+                        READING ROOM
+                    </span>
+
+                    <h2>
+                        Future Engineers
+                    </h2>
+
+                </div>
+
+            </header>
+
+
+            <main class="page-content">
+
+                <div class="section-intro">
+
+                    <p>
+                        Books, stories and ideas that can inspire
+                        the engineers of tomorrow.
+                    </p>
+
+                </div>
+
+
+                <!-- BOOKS WILL BE ADDED LATER -->
+
+                <div class="coming-soon-card">
+
+                    <span class="coming-icon">
+                        📚
+                    </span>
+
+                    <h3>
+                        Coming Soon
+                    </h3>
+
+                    <p>
+                        The Engineers' Reading Room is under construction.
+                    </p>
+
+                </div>
+
+            </main>
+
+        </section>
+
+
+        <!-- =================================================
+             7. ABOUT SCREEN
+        ================================================== -->
+
+        <section id="about-screen" class="screen">
+
+            <header class="page-header">
+
+                <button
+                    class="back-button"
+                    data-action="back">
+
+                    ←
+
+                </button>
+
+                <div>
+
+                    <span class="page-label">
+                        FORMULAHUB
+                    </span>
+
+                    <h2>
+                        About
+                    </h2>
+
+                </div>
+
+            </header>
+
+
+            <main class="about-content">
+
+
+                <div class="about-hero">
+
+                    <div class="about-logo">
+                        Σ
+                    </div>
+
+                    <h3>
+                        FormulaHub
+                    </h3>
+
+                    <p>
+                        Engineering made simpler.
+                    </p>
+
+                </div>
+
+
+                <!-- CREATOR -->
+
+                <div class="about-card">
+
+                    <span class="about-label">
+                        CREATED BY
+                    </span>
+
+                    <h3>
+                        Rihan Shaikh
+                    </h3>
+
+                    <p>
+                        A student building a small tool to make
+                        engineering formulas easier to find,
+                        understand and revise.
+                    </p>
+
+                </div>
+
+
+                <!-- GITHUB -->
+
+                <div class="about-card">
+
+                    <span class="about-label">
+                        BUILT WITH
+                    </span>
+
+                    <h3>
+                        GitHub
+                    </h3>
+
+                    <p>
+                        With the help of GitHub and a lot of
+                        trial, error and debugging.
+                    </p>
+
+                </div>
+
+
+                <!-- CHATGPT -->
+
+                <div class="about-card special-thanks">
+
+                    <span class="about-label">
+                        SPECIAL THANKS
+                    </span>
+
+                    <h3>
+                        My Bro — ChatGPT ❤️
+                    </h3>
+
+                    <p>
+                        For helping turn random ideas,
+                        broken code and engineering headaches
+                        into something that actually works.
+                    </p>
+
+                </div>
+
+
+                <!-- FEEDBACK -->
+
+                <div class="about-card">
+
+                    <span class="about-label">
+                        GOT FEEDBACK?
+                    </span>
+
+                    <h3>
+                        Help make FormulaHub better.
+                    </h3>
+
+                    <p>
+                        Found a mistake? Have an idea?
+                        Want to suggest a formula or correction?
+                        Reach out directly.
+                    </p>
+
+
+                    <div class="contact-list">
+
+                        <a
+                            href="tel:+918904580950"
+                            class="contact-button">
+
+                            📞 Call Rihan
+
+                        </a>
+
+
+                        <a
+                            href="mailto:rihan174529@gmail.com"
+                            class="contact-button">
+
+                            ✉️ Send an Email
+
+                        </a>
+
+
+                        <a
+                            href="https://www.instagram.com/rihan8_1729/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="contact-button">
+
+                            ◎ Instagram
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- FUNNY CORRECTION BOX -->
+
+                <div class="correction-card">
+
+                    <div class="correction-icon">
+                        🧑‍🔧
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Engineer's Emergency Department
+                        </h3>
+
+                        <p>
+                            Found a formula that looks suspicious?
+                        </p>
+
+                        <p>
+                            Don't fight the equation alone. 😂
+                            Just report it to Rihan.
+                        </p>
+
+                        <p class="correction-small">
+                            Because one wrong minus sign can
+                            ruin an entire engineering career.
+                            <br>
+                            <strong>
+                                (Okay... maybe that's a little dramatic.)
+                            </strong>
+                        </p>
+
+                        <a
+                            href="mailto:rihan174529@gmail.com?subject=FormulaHub%20-%20I%20Found%20a%20Mistake"
+                            class="correction-button">
+
+                            I Found a Mistake →
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- COPYRIGHT -->
+
+                <div class="about-footer
