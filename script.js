@@ -1171,4 +1171,36 @@ function escapeHTML(value) {
         .replace(
             /'/g,
             "&#039;"
-     
+        );
+}
+
+
+/* =========================================================
+   24. INITIALIZATION
+   ========================================================= */
+
+function initializeFormulaHub() {
+
+    setupActions();
+
+    startApplication();
+
+}
+
+
+/* =========================================================
+   START APPLICATION
+   ========================================================= */
+
+if (document.readyState === "loading") {
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        initializeFormulaHub
+    );
+
+} else {
+
+    initializeFormulaHub();
+
+}
