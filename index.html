@@ -5,901 +5,867 @@
     <meta charset="UTF-8">
 
     <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <meta name="theme-color" content="#080c17">
+    <meta name="theme-color" content="#0a0f16">
 
     <meta name="description"
-          content="FormulaHub — a clean formula and reference hub for future engineers.">
+        content="FormulaHub — A simple engineering formula companion for future engineers.">
 
-    <title>FormulaHub</title>
+    <title>FormulaHub 2.0</title>
 
-    <!-- Main stylesheet -->
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Main CSS -->
     <link rel="stylesheet" href="style.css">
-
-    <!-- =====================================================
-         MATHJAX
-         Formula images are NOT required.
-         Mathematical formulas will be rendered from text/data.
-         ===================================================== -->
-
-    <script>
-        window.MathJax = {
-            tex: {
-                inlineMath: [
-                    ['\\(', '\\)'],
-                    ['$', '$']
-                ],
-                displayMath: [
-                    ['\\[', '\\]'],
-                    ['$$', '$$']
-                ]
-            },
-
-            svg: {
-                fontCache: 'global'
-            }
-        };
-    </script>
-
-    <script
-        defer
-        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
-    </script>
-
 </head>
 
-
 <body>
+
+    <!-- =====================================================
+         APPLICATION CONTAINER
+    ====================================================== -->
 
     <div id="app">
 
 
         <!-- =================================================
-             SPLASH SCREEN
-             ================================================= -->
+             1. SPLASH SCREEN
+        ================================================== -->
 
-        <section
-            id="splash-screen"
-            class="screen splash-screen active"
-        >
+        <section id="splash-screen" class="screen active">
 
             <div class="splash-content">
 
-                <div class="brand-mark">
-                    ∑
-                </div>
+                <div class="splash-line"></div>
 
-                <p class="eyebrow">
-                    FORMULAHUB 2.0
-                </p>
-
-                <h1>
-                    FormulaHub
+                <h1 class="splash-title">
+                    FORMULA HUB
                 </h1>
 
-                <p>
-                    For All Future Engineers
+                <p class="splash-subtitle">
+                    BY RIHAN S.
                 </p>
 
-                <small>
-                    Created by Rihan
-                </small>
+                <div class="splash-line"></div>
 
             </div>
 
         </section>
 
 
-
         <!-- =================================================
-             MAIN APP HEADER
-             ================================================= -->
+             2. HOME SCREEN
+        ================================================== -->
 
-        <header
-            id="app-header"
-            class="app-header hidden"
-        >
+        <section id="home-screen" class="screen">
 
-            <!-- Back -->
-            <button
-                id="back-btn"
-                class="icon-btn"
-                aria-label="Go back"
-            >
-                ←
-            </button>
+            <header class="top-header">
 
+                <div class="brand">
+                    <span class="brand-mark">Σ</span>
 
-            <!-- Brand / Home -->
-            <button
-                id="home-btn"
-                class="brand-button"
-                aria-label="Go to home"
-            >
+                    <div>
+                        <h1>FormulaHub</h1>
+                        <p>Engineering made simpler.</p>
+                    </div>
+                </div>
 
-                <span class="brand-mini">
-                    ∑
-                </span>
-
-                <span>
-                    FormulaHub
-                </span>
-
-            </button>
+            </header>
 
 
-            <!-- Search -->
-            <button
-                id="search-btn"
-                class="icon-btn"
-                aria-label="Search formulas"
-            >
-                ⌕
-            </button>
+            <main class="home-content">
 
-        </header>
+                <div class="hero-text">
 
-
-
-        <!-- =================================================
-             MAIN CONTENT
-             ================================================= -->
-
-        <main id="main-content">
-
-
-
-            <!-- =================================================
-                 HOME SCREEN
-                 ================================================= -->
-
-            <section
-                id="home-screen"
-                class="screen"
-            >
-
-                <div class="page-intro">
-
-                    <p class="eyebrow">
-                        WELCOME
-                    </p>
+                    <span class="eyebrow">
+                        ENGINEERING FORMULA COMPANION
+                    </span>
 
                     <h2>
-                        What are you looking for?
+                        Choose your<br>
+                        <span>Hub.</span>
                     </h2>
 
-                    <p class="muted">
-                        Choose a subject, search a formula,
-                        or explore the reading room.
+                    <p>
+                        Less searching. Less confusion.
+                        More engineering.
                     </p>
 
                 </div>
 
 
+                <!-- SUBJECT HUBS -->
 
-                <!-- Home Search -->
+                <div class="hub-grid">
 
-                <button
-                    id="home-search-btn"
-                    class="search-bar-card"
-                >
+                    <!-- Maths -->
 
-                    <span>
-                        ⌕
-                    </span>
+                    <button class="hub-card"
+                        data-action="subject"
+                        data-subject="Maths">
 
-                    <span>
-                        Search formulas, topics, keywords...
+                        <div class="card-icon">
+                            ∑
+                        </div>
+
+                        <div class="card-text">
+
+                            <span class="card-number">
+                                01
+                            </span>
+
+                            <h3>
+                                Maths
+                            </h3>
+
+                            <p>
+                                Engineering Mathematics
+                            </p>
+
+                        </div>
+
+                        <span class="card-arrow">
+                            →
+                        </span>
+
+                    </button>
+
+
+                    <!-- Physics -->
+
+                    <button class="hub-card"
+                        data-action="subject"
+                        data-subject="Physics">
+
+                        <div class="card-icon">
+                            Φ
+                        </div>
+
+                        <div class="card-text">
+
+                            <span class="card-number">
+                                02
+                            </span>
+
+                            <h3>
+                                Physics
+                            </h3>
+
+                            <p>
+                                Laws, quantities & equations
+                            </p>
+
+                        </div>
+
+                        <span class="card-arrow">
+                            →
+                        </span>
+
+                    </button>
+
+
+                    <!-- Chemistry -->
+
+                    <button class="hub-card"
+                        data-action="subject"
+                        data-subject="Chemistry">
+
+                        <div class="card-icon">
+                            ⚗
+                        </div>
+
+                        <div class="card-text">
+
+                            <span class="card-number">
+                                03
+                            </span>
+
+                            <h3>
+                                Chemistry
+                            </h3>
+
+                            <p>
+                                Engineering Chemistry
+                            </p>
+
+                        </div>
+
+                        <span class="card-arrow">
+                            →
+                        </span>
+
+                    </button>
+
+                </div>
+
+
+                <!-- FUTURE ENGINEERS -->
+
+                <button class="future-engineers-card"
+                    data-action="future-engineers">
+
+                    <div class="future-icon">
+                        ⚙
+                    </div>
+
+                    <div>
+
+                        <span class="eyebrow">
+                            FOR THE NEXT GENERATION
+                        </span>
+
+                        <h3>
+                            For Future Engineers
+                        </h3>
+
+                        <p>
+                            Books, ideas & inspiration worth exploring.
+                        </p>
+
+                    </div>
+
+                    <span class="card-arrow">
+                        →
                     </span>
 
                 </button>
 
+            </main>
 
 
-                <!-- Main Home Cards -->
+            <!-- HOME FOOTER -->
 
-                <div class="card-grid home-grid">
+            <footer class="main-footer">
 
+                <button
+                    class="footer-button"
+                    data-action="about">
 
-                    <!-- MATHS -->
+                    About FormulaHub
 
-                    <button
-                        class="main-card subject-card maths"
-                        data-action="subject"
-                        data-subject="Maths"
-                    >
+                </button>
 
-                        <span class="card-icon">
-                            📐
-                        </span>
+                <span class="footer-divider">
+                    •
+                </span>
 
-                        <span class="card-title">
-                            Maths
-                        </span>
+                <span>
+                    Built for Engineers
+                </span>
 
-                        <span class="card-desc">
-                            Foundation to Engineering Mathematics
-                        </span>
+            </footer>
 
-                    </button>
+        </section>
 
 
+        <!-- =================================================
+             3. SUBJECT SCREEN
+        ================================================== -->
 
-                    <!-- PHYSICS -->
+        <section id="subject-screen" class="screen">
 
-                    <button
-                        class="main-card subject-card physics"
-                        data-action="subject"
-                        data-subject="Physics"
-                    >
+            <header class="page-header">
 
-                        <span class="card-icon">
-                            ⚛️
-                        </span>
+                <button
+                    class="back-button"
+                    data-action="back">
 
-                        <span class="card-title">
-                            Physics
-                        </span>
+                    ←
 
-                        <span class="card-desc">
-                            Foundation, derived concepts and laws
-                        </span>
+                </button>
 
-                    </button>
+                <div>
 
-
-
-                    <!-- CHEMISTRY -->
-
-                    <button
-                        class="main-card subject-card chemistry"
-                        data-action="subject"
-                        data-subject="Chemistry"
-                    >
-
-                        <span class="card-icon">
-                            🧪
-                        </span>
-
-                        <span class="card-title">
-                            Chemistry
-                        </span>
-
-                        <span class="card-desc">
-                            Physical chemistry and engineering applications
-                        </span>
-
-                    </button>
-
-
-
-                    <!-- READING ROOM -->
-
-                    <button
-                        class="main-card utility-card"
-                        data-action="novel"
-                    >
-
-                        <span class="card-icon">
-                            📖
-                        </span>
-
-                        <span class="card-title">
-                            Reading Room
-                        </span>
-
-                        <span class="card-desc">
-                            Short science and engineering reads
-                        </span>
-
-                    </button>
-
-
-
-                    <!-- ABOUT -->
-
-                    <button
-                        class="main-card utility-card"
-                        data-action="about"
-                    >
-
-                        <span class="card-icon">
-                            ℹ️
-                        </span>
-
-                        <span class="card-title">
-                            About
-                        </span>
-
-                        <span class="card-desc">
-                            About FormulaHub and how to use it
-                        </span>
-
-                    </button>
-
-
-                </div>
-
-            </section>
-
-
-
-            <!-- =================================================
-                 SUBJECT SCREEN
-                 Maths / Physics / Chemistry
-                 ================================================= -->
-
-            <section
-                id="subject-screen"
-                class="screen"
-            >
-
-                <div class="page-intro">
-
-                    <p
-                        id="subject-eyebrow"
-                        class="eyebrow"
-                    >
-                        SUBJECT
-                    </p>
+                    <span class="page-label">
+                        FORMULA HUB
+                    </span>
 
                     <h2 id="subject-title">
-                        Subject
+                        Maths
                     </h2>
 
-                    <p
-                        id="subject-description"
-                        class="muted"
-                    >
+                </div>
+
+            </header>
+
+
+            <main class="page-content">
+
+                <div class="section-intro">
+
+                    <p id="subject-description">
+                        Select a chapter to continue.
                     </p>
 
                 </div>
 
 
-                <!-- Sections are generated by script.js -->
+                <!-- JS WILL GENERATE CHAPTER CARDS HERE -->
 
                 <div
-                    id="section-list"
-                    class="card-grid"
-                >
+                    id="chapter-list"
+                    class="dynamic-list">
+
+                    <div class="loading-message">
+                        Loading chapters...
+                    </div>
+
                 </div>
 
-            </section>
+            </main>
+
+        </section>
 
 
+        <!-- =================================================
+             4. CHAPTER SCREEN
+        ================================================== -->
 
-            <!-- =================================================
-                 SECTION SCREEN
-                 Example:
-                 Maths → Engineering Mathematics
-                 ================================================= -->
+        <section id="chapter-screen" class="screen">
 
-            <section
-                id="chapter-screen"
-                class="screen"
-            >
+            <header class="page-header">
 
-                <div class="page-intro">
+                <button
+                    class="back-button"
+                    data-action="back">
 
-                    <p
-                        id="chapter-eyebrow"
-                        class="eyebrow"
-                    >
-                        SECTION
-                    </p>
+                    ←
+
+                </button>
+
+                <div>
+
+                    <span
+                        id="chapter-subject-label"
+                        class="page-label">
+
+                        MATHS
+
+                    </span>
 
                     <h2 id="chapter-title">
-                        Section
+                        Chapter
                     </h2>
 
-                    <p
-                        id="chapter-description"
-                        class="muted"
-                    >
+                </div>
+
+            </header>
+
+
+            <main class="page-content">
+
+                <div class="section-intro">
+
+                    <p>
+                        Select a formula to view its details.
                     </p>
 
                 </div>
 
 
-                <!-- Topics generated by script.js -->
-
-                <div
-                    id="topic-list"
-                    class="card-grid"
-                >
-                </div>
-
-            </section>
-
-
-
-            <!-- =================================================
-                 TOPIC SCREEN
-                 Example:
-                 Maths
-                   → Engineering Mathematics
-                     → Differential Calculus
-                 ================================================= -->
-
-            <section
-                id="formula-list-screen"
-                class="screen"
-            >
-
-                <div class="page-intro">
-
-                    <p
-                        id="topic-eyebrow"
-                        class="eyebrow"
-                    >
-                        TOPIC
-                    </p>
-
-                    <h2 id="topic-title">
-                        Topic
-                    </h2>
-
-                    <p
-                        id="topic-description"
-                        class="muted"
-                    >
-                    </p>
-
-                </div>
-
-
-                <!-- Formula cards generated by script.js -->
+                <!-- JS WILL GENERATE FORMULA LIST HERE -->
 
                 <div
                     id="formula-list"
-                    class="formula-list"
-                >
+                    class="dynamic-list">
+
+                    <div class="loading-message">
+                        Loading formulas...
+                    </div>
+
                 </div>
 
-            </section>
+            </main>
+
+        </section>
 
 
+        <!-- =================================================
+             5. FORMULA VIEWER
+        ================================================== -->
 
-            <!-- =================================================
-                 FORMULA VIEWER
-                 ================================================= -->
+        <section id="formula-screen" class="screen">
 
-            <section
-                id="formula-screen"
-                class="screen"
-            >
+            <header class="page-header">
 
-                <!-- Breadcrumb -->
+                <button
+                    class="back-button"
+                    data-action="back">
 
-                <div
-                    id="formula-breadcrumb"
-                    class="formula-breadcrumb"
-                >
-                </div>
+                    ←
 
+                </button>
 
-                <div class="formula-viewer">
+                <div>
 
-
-                    <!-- Subject / Section / Topic -->
-
-                    <p
-                        id="formula-subject"
-                        class="eyebrow"
-                    >
-                    </p>
-
-
-                    <!-- Formula Name -->
+                    <span class="page-label">
+                        FORMULA
+                    </span>
 
                     <h2 id="formula-title">
                         Formula
                     </h2>
 
-
-                    <!-- Mathematical Formula -->
-
-                    <div
-                        id="formula-expression"
-                        class="formula-box"
-                    >
-                    </div>
-
-
-
-                    <!-- TERMS -->
-
-                    <div class="info-section">
-
-                        <h3>
-                            Terms
-                        </h3>
-
-                        <ul id="formula-terms">
-                        </ul>
-
-                    </div>
-
-
-
-                    <!-- UNIT -->
-
-                    <div
-                        id="formula-unit-wrap"
-                        class="info-section"
-                    >
-
-                        <h3>
-                            Unit
-                        </h3>
-
-                        <p id="formula-unit">
-                        </p>
-
-                    </div>
-
-
-
-                    <!-- EXAMPLE -->
-
-                    <div class="info-section">
-
-                        <h3>
-                            Example
-                        </h3>
-
-                        <p id="formula-example">
-                        </p>
-
-                    </div>
-
-
-
-                    <!-- NOTE -->
-
-                    <div
-                        id="formula-note-wrap"
-                        class="note-card"
-                    >
-
-                        <strong>
-                            Note
-                        </strong>
-
-                        <p id="formula-note">
-                        </p>
-
-                    </div>
-
-
-
-                    <!-- ENGINEERING USE -->
-
-                    <div
-                        id="formula-engineering-wrap"
-                        class="note-card engineering-use"
-                    >
-
-                        <strong>
-                            Engineering Use
-                        </strong>
-
-                        <p id="formula-engineering">
-                        </p>
-
-                    </div>
-
-
                 </div>
 
-            </section>
+            </header>
 
 
+            <main class="formula-content">
 
-            <!-- =================================================
-                 SEARCH SCREEN
-                 ================================================= -->
 
-            <section
-                id="search-screen"
-                class="screen"
-            >
+                <!-- FORMULA IMAGE -->
 
-                <div class="page-intro">
+                <div class="formula-image-box">
 
-                    <p class="eyebrow">
-                        SEARCH
-                    </p>
+                    <div
+                        id="formula-image-placeholder"
+                        class="formula-placeholder">
 
-                    <h2>
-                        Find a formula
-                    </h2>
+                        Formula Image
 
-                    <p class="muted">
-                        Search by formula name, topic,
-                        subject, keyword, or term.
-                    </p>
+                    </div>
+
+                    <img
+                        id="formula-image"
+                        src=""
+                        alt="Engineering Formula"
+                        loading="lazy"
+                        style="display: none;">
 
                 </div>
 
 
+                <!-- TERMS -->
 
-                <!-- Search Input -->
+                <div class="info-card">
 
-                <label
-                    class="search-input-wrap"
-                    for="search-input"
-                >
-
-                    <span>
-                        ⌕
+                    <span class="info-label">
+                        TERMS
                     </span>
 
-                    <input
-                        id="search-input"
-                        type="search"
-                        autocomplete="off"
-                        placeholder="Try: quadratic, force, pH..."
-                    >
+                    <div
+                        id="formula-terms"
+                        class="info-content">
 
-                    <button
-                        id="clear-search"
-                        class="clear-search"
-                        type="button"
-                        aria-label="Clear search"
-                    >
-                        ×
-                    </button>
+                        —
 
-                </label>
+                    </div>
+
+                </div>
 
 
+                <!-- UNIT -->
 
-                <!-- Search Results -->
+                <div class="info-card">
+
+                    <span class="info-label">
+                        SI UNIT
+                    </span>
+
+                    <div
+                        id="formula-unit"
+                        class="info-content">
+
+                        —
+
+                    </div>
+
+                </div>
+
+
+                <!-- EXAMPLE -->
+
+                <div class="info-card">
+
+                    <span class="info-label">
+                        EXAMPLE
+                    </span>
+
+                    <div
+                        id="formula-example"
+                        class="info-content">
+
+                        —
+
+                    </div>
+
+                </div>
+
+
+                <!-- NOTE -->
 
                 <div
-                    id="search-results"
-                    class="formula-list search-results"
-                >
-                </div>
+                    id="formula-note-card"
+                    class="info-card note-card">
 
-            </section>
+                    <span class="info-label">
+                        ENGINEER'S NOTE
+                    </span>
 
+                    <div
+                        id="formula-note"
+                        class="info-content">
 
+                        —
 
-            <!-- =================================================
-                 READING ROOM
-                 ================================================= -->
-
-            <section
-                id="novel-screen"
-                class="screen"
-            >
-
-                <div class="page-intro">
-
-                    <p class="eyebrow">
-                        READING ROOM
-                    </p>
-
-                    <h2>
-                        Science & Engineering,
-                        beyond formulas.
-                    </h2>
-
-                    <p class="muted">
-                        Short reads about science,
-                        engineering and interesting concepts.
-                    </p>
+                    </div>
 
                 </div>
 
 
+                <!-- WRONG FORMULA REPORT -->
 
-                <div class="card-grid">
+                <div class="formula-feedback-box">
 
+                    <span class="feedback-icon">
+                        🛠️
+                    </span>
 
-                    <button
-                        class="main-card article-placeholder"
-                    >
+                    <div>
 
-                        <span class="card-icon">
-                            🔧
-                        </span>
+                        <h3>
+                            Found something wrong?
+                        </h3>
 
-                        <span class="card-title">
-                            Engineering Stories
-                        </span>
+                        <p>
+                            Even engineers make mistakes.
+                            If you notice an incorrect formula,
+                            missing information, or a correction,
+                            let Rihan know directly.
+                        </p>
 
-                        <span class="card-desc">
-                            Coming soon
-                        </span>
+                        <a
+                            href="mailto:rihan174529@gmail.com?subject=FormulaHub%20Correction"
+                            class="feedback-button">
 
-                    </button>
+                            Report a correction →
 
+                        </a>
 
-
-                    <button
-                        class="main-card article-placeholder"
-                    >
-
-                        <span class="card-icon">
-                            ⚛️
-                        </span>
-
-                        <span class="card-title">
-                            Science Stories
-                        </span>
-
-                        <span class="card-desc">
-                            Coming soon
-                        </span>
-
-                    </button>
-
-
-
-                    <button
-                        class="main-card article-placeholder"
-                    >
-
-                        <span class="card-icon">
-                            💡
-                        </span>
-
-                        <span class="card-title">
-                            Interesting Concepts
-                        </span>
-
-                        <span class="card-desc">
-                            Coming soon
-                        </span>
-
-                    </button>
-
-
-
-                    <button
-                        class="main-card article-placeholder"
-                    >
-
-                        <span class="card-icon">
-                            🧠
-                        </span>
-
-                        <span class="card-title">
-                            Lesser-Known Facts
-                        </span>
-
-                        <span class="card-desc">
-                            Coming soon
-                        </span>
-
-                    </button>
-
+                    </div>
 
                 </div>
 
-            </section>
+            </main>
 
-
-
-            <!-- =================================================
-                 ABOUT
-                 ================================================= -->
-
-            <section
-                id="about-screen"
-                class="screen"
-            >
-
-                <div class="page-intro">
-
-                    <p class="eyebrow">
-                        ABOUT
-                    </p>
-
-                    <h2>
-                        FormulaHub
-                    </h2>
-
-                    <p class="muted">
-                        A clean and searchable formula reference
-                        built for students and future engineers.
-                    </p>
-
-                </div>
-
-
-
-                <div class="about-card">
-
-                    <h3>
-                        How it works
-                    </h3>
-
-                    <p>
-                        Browse from subject → section → topic → formula,
-                        or search directly for a formula.
-                    </p>
-
-
-                    <h3>
-                        Built around one idea
-                    </h3>
-
-                    <p>
-                        Quality over quantity.
-                        Only useful formulas, terms, examples,
-                        notes and engineering applications belong here.
-                    </p>
-
-
-                    <h3>
-                        Formula system
-                    </h3>
-
-                    <p>
-                        Formula expressions are rendered digitally,
-                        so hundreds of formulas can be stored without
-                        hundreds of image files.
-                    </p>
-
-
-                    <h3>
-                        Created by
-                    </h3>
-
-                    <p>
-                        Rihan
-                    </p>
-
-                </div>
-
-            </section>
-
-
-        </main>
-
+        </section>
 
 
         <!-- =================================================
-             FOOTER
-             ================================================= -->
+             6. FUTURE ENGINEERS / READING SCREEN
+        ================================================== -->
 
-        <footer
-            id="app-footer"
-            class="app-footer hidden"
-        >
+        <section id="future-screen" class="screen">
 
-            <span>
-                FormulaHub 2.0
-            </span>
+            <header class="page-header">
 
-            <span>
-                Built for future engineers
-            </span>
+                <button
+                    class="back-button"
+                    data-action="back">
 
-        </footer>
+                    ←
 
+                </button>
+
+                <div>
+
+                    <span class="page-label">
+                        READING ROOM
+                    </span>
+
+                    <h2>
+                        Future Engineers
+                    </h2>
+
+                </div>
+
+            </header>
+
+
+            <main class="page-content">
+
+                <div class="section-intro">
+
+                    <p>
+                        Books, stories and ideas that can inspire
+                        the engineers of tomorrow.
+                    </p>
+
+                </div>
+
+
+                <!-- BOOKS WILL BE ADDED LATER -->
+
+                <div class="coming-soon-card">
+
+                    <span class="coming-icon">
+                        📚
+                    </span>
+
+                    <h3>
+                        Coming Soon
+                    </h3>
+
+                    <p>
+                        The Engineers' Reading Room is under construction.
+                    </p>
+
+                </div>
+
+            </main>
+
+        </section>
+
+
+        <!-- =================================================
+             7. ABOUT SCREEN
+        ================================================== -->
+
+        <section id="about-screen" class="screen">
+
+            <header class="page-header">
+
+                <button
+                    class="back-button"
+                    data-action="back">
+
+                    ←
+
+                </button>
+
+                <div>
+
+                    <span class="page-label">
+                        FORMULAHUB
+                    </span>
+
+                    <h2>
+                        About
+                    </h2>
+
+                </div>
+
+            </header>
+
+
+            <main class="about-content">
+
+
+                <div class="about-hero">
+
+                    <div class="about-logo">
+                        Σ
+                    </div>
+
+                    <h3>
+                        FormulaHub
+                    </h3>
+
+                    <p>
+                        Engineering made simpler.
+                    </p>
+
+                </div>
+
+
+                <!-- CREATOR -->
+
+                <div class="about-card">
+
+                    <span class="about-label">
+                        CREATED BY
+                    </span>
+
+                    <h3>
+                        Rihan Shaikh
+                    </h3>
+
+                    <p>
+                        A student building a small tool to make
+                        engineering formulas easier to find,
+                        understand and revise.
+                    </p>
+
+                </div>
+
+
+                <!-- GITHUB -->
+
+                <div class="about-card">
+
+                    <span class="about-label">
+                        BUILT WITH
+                    </span>
+
+                    <h3>
+                        GitHub
+                    </h3>
+
+                    <p>
+                        With the help of GitHub and a lot of
+                        trial, error and debugging.
+                    </p>
+
+                </div>
+
+
+                <!-- CHATGPT -->
+
+                <div class="about-card special-thanks">
+
+                    <span class="about-label">
+                        SPECIAL THANKS
+                    </span>
+
+                    <h3>
+                        My Bro — ChatGPT ❤️
+                    </h3>
+
+                    <p>
+                        For helping turn random ideas,
+                        broken code and engineering headaches
+                        into something that actually works.
+                    </p>
+
+                </div>
+
+
+                <!-- FEEDBACK -->
+
+                <div class="about-card">
+
+                    <span class="about-label">
+                        GOT FEEDBACK?
+                    </span>
+
+                    <h3>
+                        Help make FormulaHub better.
+                    </h3>
+
+                    <p>
+                        Found a mistake? Have an idea?
+                        Want to suggest a formula or correction?
+                        Reach out directly.
+                    </p>
+
+
+                    <div class="contact-list">
+
+                        <a
+                            href="tel:+918904580950"
+                            class="contact-button">
+
+                            📞 Call Rihan
+
+                        </a>
+
+
+                        <a
+                            href="mailto:rihan174529@gmail.com"
+                            class="contact-button">
+
+                            ✉️ Send an Email
+
+                        </a>
+
+
+                        <a
+                            href="https://www.instagram.com/rihan8_1729/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="contact-button">
+
+                            ◎ Instagram
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- FUNNY CORRECTION BOX -->
+
+                <div class="correction-card">
+
+                    <div class="correction-icon">
+                        🧑‍🔧
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Engineer's Emergency Department
+                        </h3>
+
+                        <p>
+                            Found a formula that looks suspicious?
+                        </p>
+
+                        <p>
+                            Don't fight the equation alone. 😂
+                            Just report it to Rihan.
+                        </p>
+
+                        <p class="correction-small">
+                            Because one wrong minus sign can
+                            ruin an entire engineering career.
+                            <br>
+                            <strong>
+                                (Okay... maybe that's a little dramatic.)
+                            </strong>
+                        </p>
+
+                        <a
+                            href="mailto:rihan174529@gmail.com?subject=FormulaHub%20-%20I%20Found%20a%20Mistake"
+                            class="correction-button">
+
+                            I Found a Mistake →
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- COPYRIGHT -->
+
+                
+                        <div class="about-footer">
+
+        <p>
+            FormulaHub 2.0
+        </p>
+
+        <span>
+            Built for Future Engineers
+        </span>
 
     </div>
 
+</main>
+
+</section>
 
 
-    <!-- =====================================================
-         DATA
-         MUST LOAD BEFORE SCRIPT.JS
-         ===================================================== -->
+</div>
 
-    <script src="data/formulas.js"></script>
 
-    <!-- Main application logic -->
+<!-- =====================================================
+     JAVASCRIPT
+====================================================== -->
 
-    <script src="script.js"></script>
+<script src="data/formulas.js"></script>
+<script src="script.js"></script>
 
 </body>
 
-    </html>
-             
+</html>
