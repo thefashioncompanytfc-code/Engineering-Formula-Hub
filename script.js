@@ -1171,6 +1171,7 @@ function escapeHTML(value) {
         .replace(
             /'/g,
             "&#039;"
+                  
         );
 }
 
@@ -1204,3 +1205,4 @@ if (document.readyState === "loading") {
     initializeFormulaHub();
 
 }
+     
